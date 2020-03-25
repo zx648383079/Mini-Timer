@@ -59,7 +59,7 @@ import {
     IMyApp
 } from '../../app';
 import { IUser } from '../../api/model';
-import { WxJson, WxPage, CustomEvent } from '../../../typings/wx/lib.wx.page';
+import { WxJson, WxPage, CustomEvent } from '../../../typings/wx/lib.vue';
 const app = getApp<IMyApp>();
 
 interface IPageData {

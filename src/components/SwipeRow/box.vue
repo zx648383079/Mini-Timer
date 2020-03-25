@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { SwipeRow } from "./index.vue";
-import { WxComponent, WxJson, WxMethod } from "../../../typings/wx/lib.wx.page";
+import { WxComponent, WxJson, WxMethod } from "../../../typings/wx/lib.vue";
 
 @WxJson({
     component: true

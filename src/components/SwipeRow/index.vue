@@ -17,7 +17,7 @@
     </movable-area>
 </template>
 <script lang="ts">
-import { WxComponent, WxJson, WxMethod, TouchEvent, Touch, CustomEvent } from "../../../typings/wx/lib.wx.page";
+import { WxComponent, WxJson, WxMethod, TouchEvent, Touch, CustomEvent } from "../../../typings/wx/lib.vue";
 
 
 interface IComponentData {

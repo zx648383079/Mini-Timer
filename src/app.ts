@@ -5,7 +5,7 @@ import {
     IUser, ILogin, IRegister, IData
 } from "./api/model";
 import { getProfile, login, logout, authLogin, register, sendFindEmail } from "./api/user";
-import { WxPage } from "typings/wx/lib.wx.page";
+import { WxPage } from "typings/wx/lib.vue";
 
 //app.ts
 export interface IMyApp {

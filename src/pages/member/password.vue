@@ -16,7 +16,7 @@
     </div>
 </template>
 <script lang="ts">
-import { WxJson, WxPage } from "../../../typings/wx/lib.wx.page";
+import { WxJson, WxPage } from "../../../typings/wx/lib.vue";
 import { IMyApp } from "../../app";
 import { updatePassword } from "../../api/user";
 

@@ -24,7 +24,7 @@
 import {
     IMyApp
 } from '../../../app';
-import { WxMethod, TouchEvent, WxComponent, WxJson } from '../../../../typings/wx/lib.wx.page';
+import { WxMethod, TouchEvent, WxComponent, WxJson } from '../../../../typings/wx/lib.vue';
 
 interface IComponentData {
     email: string,

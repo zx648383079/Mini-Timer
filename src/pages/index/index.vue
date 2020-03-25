@@ -8,7 +8,7 @@
 import {
     IMyApp
 } from '../../app';
-import { WxPage, WxJson } from '../../../typings/wx/lib.wx.page';
+import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 
 const app = getApp<IMyApp>();
 

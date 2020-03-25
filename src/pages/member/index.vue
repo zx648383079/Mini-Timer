@@ -23,7 +23,7 @@ import {
     IMyApp
 } from '../../app';
 import { IUser } from '../../api/model';
-import { WxPage, WxJson } from '../../../typings/wx/lib.wx.page';
+import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 
 const app = getApp<IMyApp>();
 

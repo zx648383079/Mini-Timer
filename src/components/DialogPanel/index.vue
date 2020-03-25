@@ -19,7 +19,7 @@
     </div>
 </template>
 <script lang="ts">
-import { WxJson, WxComponent, WxMethod } from "../../../typings/wx/lib.wx.page";
+import { WxJson, WxComponent, WxMethod } from "../../../typings/wx/lib.vue";
 
 interface IComponentPage {
     [key: string]: any,

@@ -21,7 +21,7 @@
 import {
     IMyApp
 } from '../../app';
-import { WxJson, WxPage, TouchEvent, getCurrentPages } from '../../../typings/wx/lib.wx.page';
+import { WxJson, WxPage, TouchEvent, getCurrentPages } from '../../../typings/wx/lib.vue';
 const app = getApp<IMyApp>();
 
 interface IPageData {
