@@ -7,3 +7,5 @@
 借助 Code Runner
 
 在文件编辑框中右键 Run Code 即可编译当前文件 目前仅支持 .ts .vue
+
+具体步骤请参考 【[博客](https://zodream.cn/blog/id/107.html)】
