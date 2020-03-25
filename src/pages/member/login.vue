@@ -71,7 +71,7 @@ export class Index extends WxPage<IPageData> {
                 if (!page) {
                     return; 
                 }
-                page.onLoad(); 
+                page.onLoad();
             }
         });
     }

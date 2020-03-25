@@ -28,7 +28,7 @@
 </template>
 <script lang="ts">
 import { WxComponent, WxJson, WxMethod } from "../../../../typings/wx/lib.vue";
-import { IMyApp } from "../../../app";
+import { IMyApp } from "../../../app.vue";
 
 interface IComponentData {
     agree: boolean,

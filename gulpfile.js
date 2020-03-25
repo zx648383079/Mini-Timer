@@ -22,6 +22,44 @@ function getSass() {
     return sassInstance;
 }
 
+function getSrcPath(src) {
+    if (process.argv.length < 4) {
+        return src;
+    }
+    if (process.argv[2] !== 'build') {
+        return src;
+    }
+    src = process.argv[3].substr(7).replace(__dirname + '\\', '').replace('\\', '/');
+    return src;
+}
+
+function getDistFolder(dist) {
+    if (process.argv.length < 4) {
+        return dist;
+    }
+    if (process.argv[2] !== 'build') {
+        return dist;
+    }
+    dist = 'dist';//process.argv[3].substr(7).replace(__dirname + '\\src', 'dist').replace('\\', '/');
+    return dist;
+}
+
+function getBuildTask(name) {
+    if (process.argv.length < 4) {
+        return name;
+    }
+    if (process.argv[2] !== 'build') {
+        return name;
+    }
+    if (process.argv[3].indexOf('.ts') > 0 && name === 'ts') {
+        return 'build';
+    }
+    if (process.argv[3].indexOf('.vue') > 0 && name === 'vue') {
+        return 'build';
+    }
+    return name;
+}
+
 function getDistPath(path) {
     path = path.replace(/\\/g, '/');
     return [path, 'dist' + path.match(/src([\/].*?)[^\/]+$/)[1]];
@@ -46,11 +84,11 @@ gulp.task('cleanall', function() {
         .pipe(clean());
 });
 
-gulp.task('ts', async() => {
-    await gulp.src('src/**/*.ts')
+gulp.task(getBuildTask('ts'), async() => {
+    await gulp.src(getSrcPath('src/**/*.ts'))
         .pipe(template('ts'))
         .pipe(getTs())
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 });
 
 gulp.task('sass', async() => {
@@ -63,51 +101,51 @@ gulp.task('sass', async() => {
 });
 
 gulp.task('vuejs', async() => {
-    await gulp.src('src/**/*.{vue,html}')
+    await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('js'))
         .pipe(rename({extname: '.js'}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 });
 gulp.task('vuets', async() => {
-    await gulp.src('src/**/*.{vue,html}')
+    await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('ts'))
         .pipe(rename({extname: '.ts'}))
         .pipe(getTs())
         .pipe(rename({extname: '.js'}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 });
 gulp.task('vuecss', async() => {
-    await gulp.src('src/**/*.{vue,html}')
+    await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('css'))
         .pipe(rename({extname: '.wxss'}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 });
 gulp.task('vuesass', async() => {
-    await gulp.src('src/**/*.{vue,html}')
+    await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('sass'))
         .pipe(template('presass'))
         .pipe(getSass())
         .pipe(template('endsass'))
         .pipe(rename({extname: '.wxss'}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 });
 
 gulp.task('vuejson', async() => {
-    await gulp.src('src/**/*.{vue,html}')
+    await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('json'))
         .pipe(rename({extname: '.json'}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 });
 
-gulp.task('vue', gulp.series('vuejs', 'vuets', 'vuecss', 'vuesass', 'vuejson', async() => {
-    await gulp.src('src/**/*.{vue,html}')
+gulp.task(getBuildTask('vue'), gulp.series('vuejs', 'vuets', 'vuecss', 'vuesass', 'vuejson', async() => {
+    await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('tpl'))
         .pipe(rename({extname: '.wxml'}))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest(getDistFolder('dist/')));
 }));
 
 gulp.task('test', async() => {
-    await gulp.src('src/app.vue')
+    await gulp.src('src/pages/task/detail.vue')
         .pipe(template('json'))
         .pipe(rename({extname: '.json'}))
         .pipe(gulp.dest('dist/'));

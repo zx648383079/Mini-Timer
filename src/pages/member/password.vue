@@ -17,7 +17,7 @@
 </template>
 <script lang="ts">
 import { WxJson, WxPage } from "../../../typings/wx/lib.vue";
-import { IMyApp } from "../../app";
+import { IMyApp } from "../../app.vue";
 import { updatePassword } from "../../api/user";
 
 const app = getApp<IMyApp>();
@@ -50,7 +50,8 @@ export default class Password extends WxPage<IPageData> {
             });
             return;
         }
-        updatePassword(this.data.oldpassword, this.data.password).then(res => {
+        updatePassword(this.data.oldpassword, this.data.password)
+            .then(_ => {
             app.logoutUser().then(() => {
                 wx.navigateTo({
                     url: 'login'

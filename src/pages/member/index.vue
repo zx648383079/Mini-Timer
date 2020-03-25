@@ -21,7 +21,7 @@
 <script lang="ts">
 import {
     IMyApp
-} from '../../app';
+} from '../../app.vue';
 import { IUser } from '../../api/model';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 
@@ -43,7 +43,11 @@ export class Index extends WxPage<IPageData> {
         user: null,
     };
 
-    onLoad() {
+    public onLoad() {
+        
+    }
+
+    public onShow() {
         app.getUser().then(res => {
             this.setData({
                 user: res

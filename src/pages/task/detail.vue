@@ -1,6 +1,5 @@
 <template>
     <div>
-        
 
     </div>
 </template>
@@ -13,15 +12,19 @@ import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 const app = getApp<IMyApp>();
 
 interface IPageData {
-    isGuest: boolean;
 }
 @WxJson({
-    navigationBarTitleText: "帮助",
-    navigationBarBackgroundColor: "#f4f4f4",
-    navigationBarTextStyle: "black"
+    navigationBarTitleText: "任务进行中",
+    navigationBarBackgroundColor: '#05a6b1',
+    navigationBarTextStyle: 'white'
 })
-export class Index extends WxPage<IPageData> {
-    
+export class Detail extends WxPage<IPageData> {
+    public data: IPageData = {
+    };
+
+    onLoad() {
+
+    }
 }
 </script>
 <style lang="scss" scoped>

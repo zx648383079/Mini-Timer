@@ -35,7 +35,10 @@ export interface IMyApp {
         "pages/member/cancel",
         "pages/member/driver",
         "pages/member/password",
-        "pages/help/index"
+        "pages/help/index",
+        "pages/task/index",
+        "pages/task/edit",
+        "pages/task/detail",
     ],
     window: {
         backgroundTextStyle: "light",
@@ -346,35 +349,11 @@ $lineHeight: 2.5rem;
         text-align: left;
     }
 
-    .input-box,
-    .code-input {
-        border-bottom: $hr;
-
-        input {
-            height: 40px;
-            border: 0;
-            background: transparent;
-            width: 100%;
-            outline: none;
-        }
-    }
-
-    .code-input {
-        display: grid;
-        grid-template-columns: 1fr 80px;
-
-        navigator {
-            border: 1px solid;
-            font-size: 12px;
-            line-height: 40px;
-        }
-    }
-
     .unlogin {
         line-height: 40px;
         text-align: left;
 
-        navigator {
+        text {
             &:last-child {
                 float: right;
             }
@@ -390,9 +369,187 @@ $lineHeight: 2.5rem;
     }
 }
 
+.input-box,
+.code-input {
+    border-bottom: $hr;
+
+    input {
+        height: 40px;
+        border: 0;
+        background: transparent;
+        width: 100%;
+        outline: none;
+    }
+}
+
+.code-input {
+    display: grid;
+    grid-template-columns: 1fr 80px;
+
+    navigator {
+        border: 1px solid;
+        font-size: 12px;
+        line-height: 40px;
+    }
+}
+
+.profile-box,
+.account-box {
+    margin-bottom: 2rem;
+    background-color: $white;
+    padding: 0 10px;
+    @include lineItem();
+
+    .avatar-item {
+        line-height: 5rem;
+
+        .fa {
+            top: 2rem;
+        }
+
+        .avatar {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            padding: 5px;
+
+            image {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    }
+
+    .line-item {
+        border-top: $hr;
+    }
+}
+
+.btn {
+    &.del-btn {
+        margin: 0.875rem;
+        box-sizing: border-box;
+        padding: 0.375rem;
+        display: block;
+        text-align: center;
+        background-color: $red;
+        color: $white;
+    }
+}
+
+.form-inline {
+    .input-group {
+        display: block;
+        border-bottom: 1px solid #777;
+        min-height: $lineHeight;
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        input[type="url"],
+        input[type="number"],
+        select,
+        textarea {
+            border: none;
+            background: transparent;
+            height: $lineHeight;
+            box-sizing: border-box;
+
+            &.height-auto {
+                height: auto;
+            }
+        }
+        input {
+            width: 100%;
+        }
+
+        span {
+            line-height: 1.875rem;
+        }
+
+        textarea {
+            width: 100%;
+            height: 5rem;
+        }
+    }
+
+    .input-radio {
+        line-height: 1.875rem;
+        position: relative;
+
+        .fa {
+            position: absolute;
+            right: 0.625rem;
+            font-size: 1.5625rem;
+            top: 0.125rem;
+        }
+    }
+    .btn {
+        line-height: $lineHeight;
+        margin-top: 8px;
+    }
+}
+
+.check-box {
+    font-size:1rem;
+    &::before {
+        content: "\e72f";
+    }
+
+    &.active {
+        &::before {
+            content: "\e731";
+        }
+    }
+}
+
+.toggle-box {
+    &::before {
+        content: "\f204";
+    }
+
+    &.active {
+        &::before {
+            content: "\f205";
+        }
+    }
+}
+
 .register-box {
     button {
         margin-top: 10px;
+    }
+}
+
+.tab-header {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row nowrap;
+    line-height: 40px;
+    background-color: $headerBg;
+    color: $white;
+    .tab-item {
+        &.active {
+            border-bottom: 2px solid #b4282d;
+            color: #b4282d;
+        }
+    }
+}
+
+.fixed-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: aquamarine;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    .fa {
+        font-size: 30px;
     }
 }
 </style>

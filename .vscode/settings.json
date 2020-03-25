@@ -1,0 +1,6 @@
+{
+    "code-runner.executorMapByFileExtension": {
+        ".vue": "gulp build --file=$fullFileName",
+        ".ts": "gulp build --file=$fullFileName",
+    }
+}

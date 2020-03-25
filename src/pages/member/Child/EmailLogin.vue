@@ -23,7 +23,7 @@
 <script lang="ts">
 import {
     IMyApp
-} from '../../../app';
+} from '../../../app.vue';
 import { WxMethod, TouchEvent, WxComponent, WxJson } from '../../../../typings/wx/lib.vue';
 
 interface IComponentData {

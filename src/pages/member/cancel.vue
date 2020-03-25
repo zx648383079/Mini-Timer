@@ -64,7 +64,7 @@ export default class Cancel extends WxPage<IPageData> {
     line-height: 40px;
     .fa {
         position: absolute;
-        top: 12px;
+        top: 2px;
         left: 20px;
     }
     &:not(:last-of-type) {
