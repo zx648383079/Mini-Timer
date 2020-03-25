@@ -107,10 +107,15 @@ gulp.task('vue', gulp.series('vuejs', 'vuets', 'vuecss', 'vuesass', 'vuejson', a
 }));
 
 gulp.task('test', async() => {
-    // await gulp.src('src/pages/article/Child/ArticleItem.vue')
-    // .pipe(template('tpl'))
-    // .pipe(rename({extname: '.wxml'}))
-    // .pipe(gulp.dest('dist/'));
+    await gulp.src('src/app.vue')
+        .pipe(template('json'))
+        .pipe(rename({extname: '.json'}))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('cleantmp', function() {
+    return gulp.src('dist/app.wxml', {read: false})
+        .pipe(clean());
 });
 
 gulp.task('md5', async() => {

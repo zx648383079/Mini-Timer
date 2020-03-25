@@ -4,7 +4,7 @@
   "scripts": {
     "start": "gulp && gulp vue",
     "watch": "gulp && gulp vue && gulp watch",
-    "build": "gulp cleanall && gulp && gulp vue"
+    "build": "gulp cleanall && gulp && gulp vue && gulp cleantmp"
   },
   "devDependencies": {
     "@types/node": "^13.9.3",
