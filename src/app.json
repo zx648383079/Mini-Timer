@@ -1,0 +1,39 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/member/index",
+        "pages/member/profile",
+        "pages/member/login",
+        "pages/member/cancel",
+        "pages/member/driver",
+        "pages/member/password",
+        "pages/help/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "backgroundColor": "#f4f4f4",
+        "navigationBarBackgroundColor": "#05a6b1",
+        "navigationBarTitleText": "ZoDream Timer",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "backgroundColor": "#fff",
+        "borderStyle": "black",
+        "selectedColor": "#b4282d",
+        "color": "#666",
+        "list": [{
+                "pagePath": "pages/index/index",
+                "iconPath": "images/icon/home.png",
+                "selectedIconPath": "images/icon/home_red.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/member/index",
+                "iconPath": "images/icon/user.png",
+                "selectedIconPath": "images/icon/user_red.png",
+                "text": "我的"
+            }
+        ]
+    },
+    "sitemapLocation": "sitemap.json"
+}

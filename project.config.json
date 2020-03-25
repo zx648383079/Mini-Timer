@@ -1,0 +1,48 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"miniprogramRoot": "dist/",
+	"compileType": "miniprogram",
+	"libVersion": "2.8.2",
+	"projectname": "Mini-Timer",
+	"scripts": {
+		"beforeCompile": "",
+		"beforePreview": "npm run start",
+		"beforeUpload": "npm run build"
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"nodeModules": true,
+		"autoAudits": false
+	},
+	"simulatorType": "wechat",
+	"appid": "wxfc5287e8354375f4",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": []
+		}
+	}
+}

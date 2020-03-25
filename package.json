@@ -1,0 +1,24 @@
+{
+  "name": "mini_timer",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "gulp && gulp vue",
+    "watch": "gulp && gulp vue && gulp watch",
+    "build": "gulp cleanall && gulp && gulp vue"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.3",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
+    "gulp-vue2mini": "^1.0.1",
+    "node-sass": "^4.13.0",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "ts-md5": "^1.2.7"
+  }
+}
