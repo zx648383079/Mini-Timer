@@ -76,6 +76,7 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
  * 封装get方法
  * @param url
  * @param data
+ * @param loading 是否显示加载中
  * @returns {Promise}
  */
 export function fetch<T>(url: string, params = {}, loading?: boolean): Promise<T> {
@@ -90,6 +91,7 @@ export function fetch<T>(url: string, params = {}, loading?: boolean): Promise<T
  * 封装post请求
  * @param url
  * @param data
+ * @param loading 是否显示加载中
  * @returns {Promise}
  */
 export function post<T>(url: string, data = {}, loading?: boolean): Promise<T> {
@@ -99,7 +101,11 @@ export function post<T>(url: string, data = {}, loading?: boolean): Promise<T> {
         loading,
     });
 }
-
+/**
+ * 删除请求
+ * @param url 
+ * @param loading 是否显示加载中
+ */
 export function deleteRequest<T>(url: string, loading?: boolean): Promise<T> {
     return request<T>('DELETE', {
         url,
@@ -111,6 +117,7 @@ export function deleteRequest<T>(url: string, loading?: boolean): Promise<T> {
  * 封装put请求
  * @param url
  * @param data
+ * @param loading 是否显示加载中
  * @returns {Promise}
  */
 export function put<T>(url: string, data = {}, loading?: boolean) {
