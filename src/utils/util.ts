@@ -41,6 +41,20 @@ export function twoPad(n: number): string {
   return str[1] ? str : '0' + str
 }
 
+export function formatHour(time: number, format?: string): string {
+    if (isNaN(time)) {
+        time = 0;
+    }
+    time = Math.floor(time / 1000);
+    let s = time % 60,
+        m = format && format.indexOf('h') < 0 ? Math.floor(time / 60) : (Math.floor(time / 60) % 60),
+        h = Math.floor(time / 3600);
+    if (!format) {
+        return (h !== 0 ? twoPad(h) + ':' : '') + twoPad(m) + ':' + twoPad(s);
+    }
+    return format.replace(/h+/, twoPad(h)).replace(/i+/, twoPad(m)).replace(/s+/, twoPad(s));
+}
+
 export function each(data: any, cb: (val: any, key: string | number) => boolean| void) {
   if (typeof data !== 'object') {
       return cb(data, 0);

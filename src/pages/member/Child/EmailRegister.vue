@@ -19,13 +19,22 @@
             <button form-type="submit">注册</button>
             <div class="input-group">
                 <div class="checkbox" @click="agree = !agree">
-                    <i :class="['fa', agree ? 'fa-check-fill' : 'fa-check']"></i>
+                    <i :class="['fa', agree ? 'fa-check-circle' : 'fa-circle']"></i>
                 </div>
-                同意本站协议
+                同意<span @click="tapaAgreement">本站协议</span>
 
                 <span class="right" @click="tapMode" data-mode="0">返回登录</span>
             </div>
         </form>
+        <div class="agreement-box" v-if="mode == 1">
+            <div class="title">注册协议</div>
+            <div class="content">
+                <p>本程序使用过程中产生的数据仅对本人公开，不会对外公布，但会存储了服务器，直到用户注销，用户产生的数据都会被删除。</p>
+            </div>
+            <div class="footer">
+                <div class="btn" @click="tapAgree">我已阅读并同意协议</div>
+            </div>
+        </div>
     </div>
 </template>
 <script lang="ts">
@@ -37,7 +46,8 @@ interface IComponentData {
     name: string,
     email: string,
     password: string,
-    rePassword: string
+    rePassword: string,
+    mode: number,
 }
 
 const app = getApp<IMyApp>();
@@ -56,7 +66,8 @@ export class EmailRegister extends WxComponent<IComponentData>  {
         email: '',
         password : '',
         rePassword : '',
-        agree: true
+        agree: true,
+        mode: 0,
     };
 
     @WxMethod()
@@ -114,6 +125,23 @@ export class EmailRegister extends WxComponent<IComponentData>  {
         });
     }
 
+    @WxMethod()
+    public tapaAgreement() {
+        this.setData({
+            mode: 1
+        });
+    }
+
+    @WxMethod()
+    public tapAgree() {
+        this.setData({
+            mode: 0,
+            agree: true
+        });
+    }
+
+
+
 }
 </script>
 <style lang="scss" scoped>
@@ -128,5 +156,31 @@ export class EmailRegister extends WxComponent<IComponentData>  {
 }
 .right {
     float: right;
+}
+.agreement-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 99;
+    .title {
+        text-align: center;
+        margin-bottom: 0;
+        line-height: 60px;
+    }
+    .content {
+        padding: 10px;
+        text-align: left;
+    }
+    .footer {
+        margin-top: 30px;
+        text-align: center;
+        .btn {
+            display: inline-block;
+        }
+    }
+
 }
 </style>

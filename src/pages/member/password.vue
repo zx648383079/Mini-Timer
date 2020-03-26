@@ -2,7 +2,7 @@
     <div>
         <div class="large-header">
             <div class="title">修改密码</div>
-            <i class="fa fa-check1" @click="tapSubmit"></i>
+            <i class="fa fa-check" @click="tapSubmit"></i>
         </div>
         <div class="input-box">
             <input type="password" placeholder="旧密码" required  v-model="oldpassword">

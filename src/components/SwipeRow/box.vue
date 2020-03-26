@@ -50,8 +50,6 @@ export class SwipeBox extends WxComponent<any> {
     @WxMethod()
     public hideRow(row: SwipeRow) {
         let nodes: SwipeRow[] = this.nodes;//this.getRelationNodes<SwipeRow>('swiperow');
-        console.log(this, nodes);
-        
         if (!nodes) {
             return;
         }

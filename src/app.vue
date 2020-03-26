@@ -500,24 +500,12 @@ $lineHeight: 2.5rem;
 .check-box {
     font-size:1rem;
     &::before {
-        content: "\e72f";
+        content: "\e8dc";
     }
 
     &.active {
         &::before {
-            content: "\e731";
-        }
-    }
-}
-
-.toggle-box {
-    &::before {
-        content: "\f204";
-    }
-
-    &.active {
-        &::before {
-            content: "\f205";
+            content: "\e8d9";
         }
     }
 }

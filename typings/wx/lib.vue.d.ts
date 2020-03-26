@@ -173,7 +173,7 @@ interface IPageJson {
   /**
    * 导航栏字体颜色
    */
-  navigationBarTextStyle?: 'dark' | 'white',
+  navigationBarTextStyle?: 'black' | 'white',
   /**
    * 导航栏样式
    */

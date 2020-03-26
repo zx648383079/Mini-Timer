@@ -4,7 +4,7 @@
             <div class="login-box" v-if="mode < 1">
                 <EmailLogin bind:click="tapChangeMode" bind:back="tapLoginBack"/>
                 <div class="login-oauth-box">
-                    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="tapAuth"><i class="fa fa-weixin"></i></button>
+                    <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="tapAuth"><i class="fa fa-wechat"></i></button>
                 </div>
             </div>
             <div class="register-box" v-if="mode == 1">
@@ -20,8 +20,8 @@
 <script lang="ts">
 import {
     IMyApp
-} from '../../app';
-import { WxJson, WxPage, TouchEvent, getCurrentPages } from '../../../typings/wx/lib.vue';
+} from '../../app.vue';
+import { WxJson, WxPage, TouchEvent } from '../../../typings/wx/lib.vue';
 const app = getApp<IMyApp>();
 
 interface IPageData {

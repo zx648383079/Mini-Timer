@@ -1,18 +1,18 @@
 <template>
     <div>
         <div class="large-header">
-            <div class="title">新建任务</div>
-            <i class="fa fa-check1"></i>
+            <div class="title">{{ info.id > 0 ? '编辑' : '新建' }}任务</div>
+            <i class="fa fa-check" @click="tapSubmit"></i>
         </div>
         <div class="input-box">
-            <input type="text" name="name" required v-model="name" placeholder="请输入账号">
+            <input type="text" name="name" required v-model="info.name" placeholder="请输入账号">
         </div>
         <div class="input-box">
-            <input type="text" name="description" required v-model="description" placeholder="请输入说明">
+            <input type="text" name="description" required v-model="info.description" placeholder="请输入说明">
         </div>
         <div class="input-box time-box">
             <span for="every_time">单次时间：</span>
-            <input type="number" id="every_time" name="every_time" v-model="every_time" placeholder="请输入单次时间">
+            <input type="number" id="every_time" name="every_time" v-model="info.every_time" placeholder="请输入单次时间">
         </div>
     </div>
 </template>
@@ -21,13 +21,13 @@ import {
     IMyApp
 } from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
+import { getTaskInfo, saveTask } from '../../api/task';
+import { ITask } from '../../api/model';
 
 const app = getApp<IMyApp>();
 
 interface IPageData {
-    name: string,
-    description: string,
-    every_time: number
+    info: ITask
 }
 @WxJson({
     navigationBarTitleText: '',
@@ -36,14 +36,42 @@ interface IPageData {
 })
 export class Edit extends WxPage<IPageData> {
     public data: IPageData = {
-        name: '',
-        description: '',
-        every_time: 25
+        info: {
+            name: '',
+            description: '',
+            every_time: 25
+        }
     };
 
-    onLoad() {
-
+    onLoad(option: any) {
+        const id = option && option.id ? parseInt(option.id, 10) : 0;
+        if (!id) {
+            return;
+        }
+        getTaskInfo(id).then(res => {
+            this.setData({
+                info: res
+            });
+        })
     }
+
+    public tapSubmit() {
+        let info = this.data.info;
+        if (!info.name) {
+            wx.showToast({
+                title: '请输入名称',
+                icon: 'none'
+            });
+            return;
+        }
+        saveTask(info).then(_ => {
+            wx.navigateBack({
+                delta: 0
+            });
+        });
+    }
+
+
 }
 </script>
 <style lang="scss" scoped>

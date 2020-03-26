@@ -2,7 +2,7 @@
     <div>
         <div class="large-header">
             <div class="title">修改{{ title }}</div>
-            <i class="fa fa-check1" @click="tapSubmit"></i>
+            <i class="fa fa-check" @click="tapSubmit"></i>
         </div>
         <div class="input-box">
             <input type="text" placeholder="{{ title }}" required  v-model="value">

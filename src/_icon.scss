@@ -1,181 +1,86 @@
 @font-face {
-    font-family: "iconfont";
-    src: url('iconfont.ttf') format('truetype');
+  font-family: "iconfont";
+  src: url('iconfont.ttf') format('truetype');
 }
 
 .fa {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
 }
 
-.fa-plus:before {
-    content: "\e620";
-}
-
-.fa-kefufill:before {
-    content: "\e740";
-}
-
-.fa-cardvip:before {
-    content: "\e66a";
-}
-
-.fa-i-card:before {
-    content: "\e62c";
-}
-
-.fa-et-checking-in:before {
-    content: "\e647";
-}
-
-.fa-cart:before {
-    content: "\e67c";
-}
-
-.fa-withdrawal:before {
-    content: "\e742";
-}
-
-.fa-invoice:before {
-    content: "\e8f0";
-}
-
-.fa-table:before {
-    content: "\e60c";
-}
-
-.fa-comment:before {
-    content: "\e6a7";
-}
-
-.fa-down::before {
-    content: "\e60b";
-}
-.fa-up::before {
-    content: "\e611";
-}
-
-.fa-collect2:before {
-    content: "\e625";
-}
-
-.fa-plus-o:before {
-    content: "\e629";
-}
-
-.fa-minus:before {
-    content: "\e601";
-}
-
-.fa-share:before {
-    content: "\e63f";
-}
-
-.fa-collect1:before {
-    content: "\e64f";
-}
-
-.fa-weixin:before {
-    content: "\e600";
-}
-
-.fa-set:before {
-    content: "\e618";
-}
-
-.fa-close:before {
-    content: "\e62b";
-}
-
-.fa-trash:before {
-    content: "\e726";
-}
-
-.fa-users:before {
-    content: "\e730";
-}
-
-.fa-search:before {
-    content: "\e63e";
-}
-
-.fa-help:before {
-    content: "\e603";
-}
-
-.fa-exchange:before {
-    content: "\e67b";
-}
-
-.fa-shield:before {
-    content: "\e70c";
-}
-
-.fa-idcard:before {
-    content: "\e7de";
-}
-
-.fa-card:before {
-    content: "\e70d";
-}
-
-.fa-check1:before {
-    content: "\ef65";
-}
-
-.fa-history:before {
-    content: "\f015";
-}
-
-.fa-home:before {
-    content: "\f017";
-}
-
-.fa-shipping-fast:before {
-    content: "\f0b3";
-}
-
-.fa-wallet:before {
-    content: "\f151";
-}
-
-.fa-collect:before {
-    content: "\e607";
-}
-
-.fa-money:before {
-    content: "\e60d";
-}
-
-.fa-map:before {
-    content: "\e65d";
-}
-
-.fa-message:before {
-    content: "\e6f2";
-}
-
-.fa-chevron-left:before {
-    content: "\e8da";
-}
-
-.fa-check-square-o:before {
-    content: "\e8d9";
-}
-
-.fa-chevron-right:before {
-    content: "\e8db";
-}
-
-.fa-ellipsis-h:before {
-    content: "\e8e3";
+.fa-check-circle:before {
+  content: "\e8d9";
 }
 
 .fa-check:before {
-    content: "\e72f";
+  content: "\e8da";
 }
 
-.fa-check-fill:before {
-    content: "\e731";
+.fa-circle:before {
+  content: "\e8dc";
+}
+
+.fa-clock-o:before {
+  content: "\e8db";
+}
+
+.fa-chevron-right:before {
+  content: "\e8dd";
+}
+
+.fa-setting:before {
+  content: "\e8de";
+}
+
+.fa-eye-slash:before {
+  content: "\e8e5";
+}
+
+.fa-eye:before {
+  content: "\e8e6";
+}
+
+.fa-history:before {
+  content: "\e8f9";
+}
+
+.fa-pause:before {
+  content: "\e906";
+}
+
+.fa-plus:before {
+  content: "\e907";
+}
+
+.fa-play:before {
+  content: "\e908";
+}
+
+.fa-help:before {
+  content: "\e90b";
+}
+
+.fa-sign-in:before {
+  content: "\e914";
+}
+
+.fa-stop:before {
+  content: "\e91e";
+}
+
+.fa-times-circle:before {
+  content: "\e924";
+}
+
+.fa-trash:before {
+  content: "\e926";
+}
+
+.fa-user:before {
+  content: "\e92d";
+}
+
+.fa-wechat:before {
+  content: "\e932";
 }

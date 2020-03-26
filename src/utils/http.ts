@@ -78,10 +78,11 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
  * @param data
  * @returns {Promise}
  */
-export function fetch<T>(url: string, params = {}): Promise<T> {
+export function fetch<T>(url: string, params = {}, loading?: boolean): Promise<T> {
     return request<T>('GET', {
         url,
-        params
+        params,
+        loading,
     });
 }
 
@@ -91,16 +92,18 @@ export function fetch<T>(url: string, params = {}): Promise<T> {
  * @param data
  * @returns {Promise}
  */
-export function post<T>(url: string, data = {}): Promise<T> {
+export function post<T>(url: string, data = {}, loading?: boolean): Promise<T> {
     return request<T>('POST', {
         url,
-        data
+        data,
+        loading,
     });
 }
 
-export function deleteRequest<T>(url: string): Promise<T> {
+export function deleteRequest<T>(url: string, loading?: boolean): Promise<T> {
     return request<T>('DELETE', {
         url,
+        loading,
     });
 }
 
@@ -110,10 +113,11 @@ export function deleteRequest<T>(url: string): Promise<T> {
  * @param data
  * @returns {Promise}
  */
-export function put<T>(url: string, data = {}) {
+export function put<T>(url: string, data = {}, loading?: boolean) {
     return request<T>('PUT', {
         url,
-        data
+        data,
+        loading,
     });
 }
 
