@@ -8,11 +8,12 @@
                 <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入账号">
             </div>
             <button form-type="submit">发送验证邮件</button>
+            <span class="right" @click="tapMode" data-mode="0">返回登录</span>
         </form>
     </div>
 </template>
 <script lang="ts">
-import { WxComponent, WxJson, WxMethod } from "../../../../typings/wx/lib.vue";
+import { WxComponent, WxJson, WxMethod, TouchEvent } from "../../../../typings/wx/lib.vue";
 import { IMyApp } from "../../../app.vue";
 
 interface IComponentData {
@@ -35,10 +36,20 @@ export class EmailFind extends WxComponent<IComponentData>  {
     };
 
     @WxMethod()
+    tapMode(e: TouchEvent) {
+        this.tapChange(e.currentTarget.dataset.mode as number);
+    }
+    @WxMethod()
+    tapChange(mode: number) {
+        this.triggerEvent('click', mode);
+    }
+
+    @WxMethod()
     formSubmit(e: any) {
         const email = e.detail.value.email;
         if (!email || !/.+@.+/.test(email)) {
             wx.showToast({
+                icon: 'none',
                 title: '请输入邮箱'
             });
             return;
@@ -62,5 +73,8 @@ export class EmailFind extends WxComponent<IComponentData>  {
 }
 .checkbox {
     display: inline-block;
+}
+.right {
+    float: right;
 }
 </style>

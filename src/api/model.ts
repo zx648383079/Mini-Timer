@@ -42,6 +42,7 @@ export interface IUser {
     avatar: string;
     token?: string;
     birthday?: string;
+    sex?: number;
 }
 
 export interface ILogin {

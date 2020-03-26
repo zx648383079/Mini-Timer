@@ -1,14 +1,14 @@
 <template>
     <div>
         <div class="profile-box" v-if="user">
-                <div class="line-item avatar-item">
+                <div class="line-item avatar-item" @click="tapAvatar">
                     <span>头像</span>
                     <span class="avatar">
                         <img :src="user.avatar" alt="">
                     </span>
                     <i class="fa fa-chevron-right"></i>
                 </div>
-                <div class="line-item">
+                <div class="line-item" @click="tapName">
                     <span>昵称</span>
                     <span>{{user.name}}</span>
                     <i class="fa fa-chevron-right"></i>
@@ -60,6 +60,7 @@ import {
 } from '../../app.vue';
 import { IUser } from '../../api/model';
 import { WxJson, WxPage, CustomEvent } from '../../../typings/wx/lib.vue';
+import { uploadAvatar, updateProfile } from '../../api/user';
 const app = getApp<IMyApp>();
 
 interface IPageData {
@@ -98,6 +99,13 @@ export class Profile extends WxPage<IPageData> {
         this.setData({
             user
         });
+        this.updateProfile('birthday', user.birthday);
+    }
+
+    public tapName() {
+        wx.navigateTo({
+            url: 'edit?field=name'
+        });
     }
 
     /**
@@ -105,12 +113,36 @@ export class Profile extends WxPage<IPageData> {
      */
     public tapSex() {
         wx.showActionSheet({
-            itemList: ['男', '女', '未知'],
+            itemList: ['未知', '男', '女'],
             success: res => {
-                console.log(res.tapIndex);
-                
+                const user = this.data.user as IUser;
+                user.sex = res.tapIndex;
+                this.setData({user});
+                this.updateProfile('sex', user.sex);
             }
         })
+    }
+
+    public tapAvatar() {
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['compressed'],
+            success (res) {
+                if (res.tempFilePaths && res.tempFilePaths.length > 0) {
+                    uploadAvatar(res.tempFilePaths[0]).then(res => {
+                        app.setUser(res);
+                    });
+                }
+            }
+        })
+    }
+
+    public updateProfile(name: string, value: any) {
+        updateProfile({
+            [name]: value
+        }).then(res => {
+            app.setUser(res);
+        });
     }
 
     public tapLogout() {

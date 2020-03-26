@@ -60,12 +60,14 @@ export class EmailLogin extends WxComponent<IComponentData>  {
         const password = e.detail.value.password;
         if (!email || !/.+@.+/.test(email)) {
             wx.showToast({
+                icon: 'none',
                 title: '请输入邮箱'
             });
             return;
         }
         if (!password || password.length < 4) {
             wx.showToast({
+                icon: 'none',
                 title: '请输入密码'
             });
             return;

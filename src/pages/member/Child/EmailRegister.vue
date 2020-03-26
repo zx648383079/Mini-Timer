@@ -19,15 +19,17 @@
             <button form-type="submit">注册</button>
             <div class="input-group">
                 <div class="checkbox" @click="agree = !agree">
-                    <i :class="['far', agree ? 'fa-check-square' : 'fa-square']"></i>
+                    <i :class="['fa', agree ? 'fa-check-fill' : 'fa-check']"></i>
                 </div>
                 同意本站协议
+
+                <span class="right" @click="tapMode" data-mode="0">返回登录</span>
             </div>
         </form>
     </div>
 </template>
 <script lang="ts">
-import { WxComponent, WxJson, WxMethod } from "../../../../typings/wx/lib.vue";
+import { WxComponent, WxJson, WxMethod, TouchEvent } from "../../../../typings/wx/lib.vue";
 import { IMyApp } from "../../../app.vue";
 
 interface IComponentData {
@@ -58,6 +60,15 @@ export class EmailRegister extends WxComponent<IComponentData>  {
     };
 
     @WxMethod()
+    tapMode(e: TouchEvent) {
+        this.tapChange(e.currentTarget.dataset.mode as number);
+    }
+    @WxMethod()
+    tapChange(mode: number) {
+        this.triggerEvent('click', mode);
+    }
+
+    @WxMethod()
     formSubmit(e: any) {
         const email = e.detail.value.email;
         const password = e.detail.value.password;
@@ -66,24 +77,28 @@ export class EmailRegister extends WxComponent<IComponentData>  {
         const agree = this.data.agree;
         if (!agree) {
             wx.showToast({
+                icon: 'none',
                 title: '请先同意本站用户协议'
             });
             return;
         }
         if (!email || !/.+@.+/.test(email)) {
             wx.showToast({
+                icon: 'none',
                 title: '请输入邮箱'
             });
             return;
         }
         if (!password || password.length < 4) {
             wx.showToast({
+                icon: 'none',
                 title: '请输入密码'
             });
             return;
         }
         if (rePassword !== password) {
             wx.showToast({
+                icon: 'none',
                 title: '两次密码不一致'
             });
             return;
@@ -110,5 +125,8 @@ export class EmailRegister extends WxComponent<IComponentData>  {
 }
 .checkbox {
     display: inline-block;
+}
+.right {
+    float: right;
 }
 </style>

@@ -16,6 +16,7 @@ interface IAppData {
 export interface IMyApp {
     globalData: IAppData,
     getUser(): Promise<IUser|null>,
+    setUser(user: IUser|null): void,
     setToken(token?: string): void,
     loginUser(params: ILogin): Promise<IUser| void>,
     authloginUser(params: any): Promise<IUser| void>;
@@ -35,6 +36,7 @@ export interface IMyApp {
         "pages/member/cancel",
         "pages/member/driver",
         "pages/member/password",
+        "pages/member/edit",
         "pages/help/index",
         "pages/task/index",
         "pages/task/edit",
@@ -94,6 +96,10 @@ export class Application extends WxApp<IAppData> implements IMyApp {
                 resolve(res);
             }).catch(reject);
         });
+    }
+
+    public setUser(user: IUser| null) {
+        this.globalData.user = user;
     }
 
     public setToken(token?: string) {
@@ -216,7 +222,7 @@ $lineHeight: 2.5rem;
         .fa {
             position: absolute;
             right: 0.3125rem;
-            top: 0.4375rem;
+            top: 0;
         }
 
         span {
@@ -372,13 +378,13 @@ $lineHeight: 2.5rem;
 .input-box,
 .code-input {
     border-bottom: $hr;
-
     input {
         height: 40px;
         border: 0;
         background: transparent;
         width: 100%;
         outline: none;
+        text-align: left;
     }
 }
 
@@ -404,7 +410,7 @@ $lineHeight: 2.5rem;
         line-height: 5rem;
 
         .fa {
-            top: 2rem;
+            top: 0;
         }
 
         .avatar {
@@ -412,7 +418,7 @@ $lineHeight: 2.5rem;
             height: 5rem;
             border-radius: 50%;
             padding: 5px;
-
+            box-sizing: border-box;
             image {
                 width: 70px;
                 height: 70px;
@@ -550,6 +556,31 @@ $lineHeight: 2.5rem;
     text-align: center;
     .fa {
         font-size: 30px;
+    }
+}
+
+.large-header {
+    background-color: $headerBg;
+    color: $white;
+    height: 100px;
+    position: relative;
+    margin-bottom: 20px;
+    .title {
+        padding: 40px 0 0 20px;
+        font-size: 30px;
+    }
+    .fa {
+        position: absolute;
+        bottom: -20px;
+        font-size: 30px;
+        display: block;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        right: 20px;
+        border-radius: 50%;
+        background-color: #1d8686;
     }
 }
 </style>

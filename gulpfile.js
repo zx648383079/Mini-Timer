@@ -26,9 +26,6 @@ function getSrcPath(src) {
     if (process.argv.length < 4) {
         return src;
     }
-    if (process.argv[2] !== 'build') {
-        return src;
-    }
     src = process.argv[3].substr(7).replace(__dirname + '\\', '').replace('\\', '/');
     return src;
 }
@@ -37,27 +34,8 @@ function getDistFolder(dist) {
     if (process.argv.length < 4) {
         return dist;
     }
-    if (process.argv[2] !== 'build') {
-        return dist;
-    }
     dist = 'dist';//process.argv[3].substr(7).replace(__dirname + '\\src', 'dist').replace('\\', '/');
     return dist;
-}
-
-function getBuildTask(name) {
-    if (process.argv.length < 4) {
-        return name;
-    }
-    if (process.argv[2] !== 'build') {
-        return name;
-    }
-    if (process.argv[3].indexOf('.ts') > 0 && name === 'ts') {
-        return 'build';
-    }
-    if (process.argv[3].indexOf('.vue') > 0 && name === 'vue') {
-        return 'build';
-    }
-    return name;
 }
 
 function getDistPath(path) {
@@ -84,7 +62,7 @@ gulp.task('cleanall', function() {
         .pipe(clean());
 });
 
-gulp.task(getBuildTask('ts'), async() => {
+gulp.task('ts', async() => {
     await gulp.src(getSrcPath('src/**/*.ts'))
         .pipe(template('ts'))
         .pipe(getTs())
@@ -137,7 +115,7 @@ gulp.task('vuejson', async() => {
         .pipe(gulp.dest(getDistFolder('dist/')));
 });
 
-gulp.task(getBuildTask('vue'), gulp.series('vuejs', 'vuets', 'vuecss', 'vuesass', 'vuejson', async() => {
+gulp.task('vue', gulp.series('vuejs', 'vuets', 'vuecss', 'vuesass', 'vuejson', async() => {
     await gulp.src(getSrcPath('src/**/*.{vue,html}'))
         .pipe(template('tpl'))
         .pipe(rename({extname: '.wxml'}))

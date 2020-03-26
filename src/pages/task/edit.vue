@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="header">
-            <div class="title">新建任务1</div>
-            <i class="fa fa-check"></i>
+        <div class="large-header">
+            <div class="title">新建任务</div>
+            <i class="fa fa-check1"></i>
         </div>
         <div class="input-box">
             <input type="text" name="name" required v-model="name" placeholder="请输入账号">
@@ -47,29 +47,6 @@ export class Edit extends WxPage<IPageData> {
 }
 </script>
 <style lang="scss" scoped>
-.header {
-    background-color: #05a6b1;
-    color: #fff;
-    height: 120px;
-    position: relative;
-    .title {
-        padding: 60px 0 0 20px;
-        font-size: 30px;
-    }
-    .fa {
-        position: absolute;
-        bottom: -20px;
-        font-size: 30px;
-        display: block;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-        line-height: 40px;
-        right: 20px;
-        border-radius: 50%;
-        background-color: #024f55;
-    }
-}
 .time-box {
     text-align: right;
     text {

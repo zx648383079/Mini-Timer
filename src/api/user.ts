@@ -1,5 +1,5 @@
-import {fetch, post, deleteRequest} from '../utils/http';
-import {IUser, ILogin, IPage, IAccountLog, ICollect, IData, IConnect, IDataOne, IRegister,} from './model';
+import {fetch, post, uploadFile, put} from '../utils/http';
+import {IUser, ILogin, IData, IConnect, IDataOne, IRegister,} from './model';
 
 export const getProfile = () => fetch<IUser>('auth/user');
 
@@ -21,3 +21,8 @@ export const updatePassword = (oldPassword: string, password: string) => post<IU
     old_password: oldPassword,
     password,
 });
+
+export const updateProfile = (param: any) => put<IUser>('auth/user/update', param);
+
+
+export const uploadAvatar = (img: string) => uploadFile<IUser>(img, {url: 'auth/user/avatar'});

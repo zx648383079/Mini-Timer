@@ -101,8 +101,8 @@ page {
             border: 0.125rem solid #99e3ff;
             border-radius: 100%;
             position: absolute;
-            left: -0.3125rem;
-            top: -0.3125rem;
+            left: -0.4125rem;
+            top: -0.4125rem;
             z-index: 0;
         }
     }

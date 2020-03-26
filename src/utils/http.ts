@@ -1,6 +1,6 @@
 import * as util from "./util";
 import { TOKEN_KEY } from "./types";
-import { IMyApp } from "../app";
+import { IMyApp } from "../app.vue";
 
 const app = getApp<IMyApp>();
 
@@ -114,5 +114,69 @@ export function put<T>(url: string, data = {}) {
     return request<T>('PUT', {
         url,
         data
+    });
+}
+
+/**
+ * 上传文件
+ * @param file 要上传文件资源的路径 (本地路径)
+ * @param requestHandler 
+ * @param name 上传文件的对应的 key
+ */
+export function uploadFile<T>(file: string, requestHandler: IRequest, name: string = 'file'): Promise<T> {
+    let { url, params, data, headers, mask, loading } = requestHandler;
+    if (loading === undefined || loading) {
+      wx.showLoading && wx.showLoading({title: 'Loading...', mask: mask ? mask : false})
+    }
+    const configs = util.getAppParams();
+    if (!params) {
+        params = {};
+    }
+    if (!headers) {
+        headers = {};
+    }
+    params.appid = configs.appid;
+    params.timestamp = configs.timestamp;
+    params.sign = configs.sign;
+    const token = wx.getStorageSync(TOKEN_KEY)
+    if (token) {
+        headers.Authorization = 'Bearer ' + token;
+    }
+    return new Promise<T>((resolve, reject) => {
+        wx.uploadFile({
+            url: util.uriEncode(util.apiEndpoint + url, params),
+            formData: data,
+            filePath: file,
+            name,
+            header: Object.assign({
+                'Accept': 'application/json',
+            }, headers),
+            success: function (res) {
+                const { data, statusCode } = res;
+                if (statusCode === 200) {
+                    resolve(data as any);
+                    return;
+                }
+                wx.showToast({
+                    title: (data as any).message,
+                    icon: 'none',
+                    duration: 2000
+                });
+                if (statusCode === 401) {
+                    app && app.setToken();
+                    wx.navigateTo({
+                        url: '/pages/member/login'
+                    });
+                }
+                // 处理数据
+                reject(res)
+            },
+            fail: function () {
+                reject('Network request failed')
+            },
+            complete: function () {
+                wx.hideLoading && wx.hideLoading()
+            }
+        })
     });
 }
