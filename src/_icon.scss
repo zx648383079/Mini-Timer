@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+.fa-bell:before {
+  content: "\e8cd";
+}
+
 .fa-check-circle:before {
   content: "\e8d9";
 }

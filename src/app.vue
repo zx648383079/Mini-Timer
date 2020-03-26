@@ -41,6 +41,7 @@ export interface IMyApp {
         "pages/task/index",
         "pages/task/edit",
         "pages/task/detail",
+        "pages/message/index",
     ],
     window: {
         backgroundTextStyle: "light",
