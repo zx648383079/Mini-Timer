@@ -1,9 +1,9 @@
 import {fetch, post, uploadFile, put} from '../utils/http';
-import {IUser, ILogin, IData, IConnect, IDataOne, IRegister,} from './model';
+import {IUser, ILogin, IData, IDataOne, IRegister, IDriver,} from './model';
 
 export const getProfile = () => fetch<IUser>('auth/user');
 
-export const getConnect = () => fetch<IData<IConnect>>('shop/account/connect');
+export const getDriver = () => fetch<IData<IDriver>>('auth/user/driver');
 
 export const login = (param: ILogin) => post<IUser>('auth/login', param);
 
@@ -12,6 +12,8 @@ export const authLogin = (param: any) => post<IUser>('auth/oauth/mini', param);
 export const logout = () => fetch('auth/logout');
 
 export const register = (param: IRegister) => post<IUser>('auth/register', param);
+
+export const cancelUser = (param: any) => post<IUser>('auth/user/cancel', param);
 
 export const sendFindEmail = (email: string) => post<IDataOne<boolean>>('auth/password/send_find_email', {
     email

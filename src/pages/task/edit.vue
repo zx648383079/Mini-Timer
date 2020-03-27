@@ -65,9 +65,7 @@ export class Edit extends WxPage<IPageData> {
             return;
         }
         saveTask(info).then(_ => {
-            wx.navigateBack({
-                delta: 0
-            });
+            wx.navigateBack();
         });
     }
 

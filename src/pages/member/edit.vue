@@ -47,9 +47,7 @@ export default class Password extends WxPage<IPageData> {
         data.title = PROFILE_NAMES.hasOwnProperty(data.field) ? PROFILE_NAMES[data.field]  : '信息';
         app.getUser().then(res => {
             if (!res) {
-                wx.navigateBack({
-                    delta: 0
-                })
+                wx.navigateBack()
                 return;
             }
             data.user = res;
@@ -74,9 +72,7 @@ export default class Password extends WxPage<IPageData> {
             [data.field]: data.value
         }).then(res => {
             app.setUser(res);
-            wx.navigateBack({
-                delta: 0
-            });
+            wx.navigateBack();
         });
     }
 }

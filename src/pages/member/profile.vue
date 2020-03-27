@@ -15,7 +15,7 @@
                 </div>
                 <div class="line-item" @click="tapSex">
                     <span>性别</span>
-                    <span>{{user.sex}}</span>
+                    <span>{{sex}}</span>
                     <i class="fa fa-chevron-right"></i>
                 </div>
                 <picker
@@ -63,9 +63,12 @@ import { WxJson, WxPage, CustomEvent } from '../../../typings/wx/lib.vue';
 import { uploadAvatar, updateProfile } from '../../api/user';
 const app = getApp<IMyApp>();
 
+const SEX_ITEMS = ['未知', '男', '女'];
+
 interface IPageData {
     user: IUser|null,
     max: string,
+    sex: string,
 }
 @WxJson({
     navigationBarTitleText: "个人信息",
@@ -75,7 +78,8 @@ interface IPageData {
 export class Profile extends WxPage<IPageData> {
     public data: IPageData = {
         user: null,
-        max: '2020-05-19'
+        max: '2020-05-19',
+        sex: SEX_ITEMS[2]
     };
 
     public onLoad() {
@@ -84,8 +88,12 @@ export class Profile extends WxPage<IPageData> {
             max: [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('-')
         });
         app.getUser().then(res => {
+            if (!res) {
+                return;
+            }
             this.setData({
-                user: res
+                user: res,
+                sex: res.sex ? SEX_ITEMS[res.sex] : SEX_ITEMS[2]
             });
         });
     }
@@ -113,11 +121,11 @@ export class Profile extends WxPage<IPageData> {
      */
     public tapSex() {
         wx.showActionSheet({
-            itemList: ['未知', '男', '女'],
+            itemList: SEX_ITEMS,
             success: res => {
                 const user = this.data.user as IUser;
                 user.sex = res.tapIndex;
-                this.setData({user});
+                this.setData({user, sex: SEX_ITEMS[res.tapIndex]});
                 this.updateProfile('sex', user.sex);
             }
         })

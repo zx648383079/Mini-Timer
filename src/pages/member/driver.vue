@@ -3,19 +3,21 @@
         <div class="tip">
             最新登陆设备：点击可以查看登陆时间
         </div>
-        <a class="item">
-            <div class="name">MI 8</div>
-            <div class="time">4秒前</div>
+        <div class="item" v-for="(item, index) in items" :key="index">
+            <div class="name">{{ item.name }}</div>
+            <div class="time">{{ item.created_at }}</div>
             <i class="fa fa-chevron-right" aria-hidden="true"></i>
-        </a>
+        </div>
     </div>
 </template>
 <script lang="ts">
 import { WxPage, WxJson } from "../../../typings/wx/lib.vue";
+import { getDriver } from "../../api/user";
+import { IDriver } from "../../api/model";
 
 
 interface IPageData {
-    items: string[],
+    items: IDriver[],
 }
 
 @WxJson({
@@ -26,6 +28,14 @@ interface IPageData {
 export default class Driver extends WxPage<IPageData> {
     public data: IPageData = {
         items: [],
+    }
+
+    onLoad() {
+        getDriver().then(res => {
+            this.setData({
+                items: res.data
+            });
+        });
     }
 }
 </script>

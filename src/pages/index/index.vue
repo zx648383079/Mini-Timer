@@ -6,6 +6,10 @@
                 <div class="desc">{{ item.task.description }}</div>
                 <div class="count" v-if="item.amount > 1">{{ item.amount }}</div>
             </div>
+
+            <div class="empty-box" v-if="items.length < 1">
+                您的今日任务为空
+            </div>
         </div>
 
         <div class="fixed-icon" @click="tapAdd">
@@ -112,6 +116,9 @@ export class Index extends WxPage<IPageData> {
 }
 </script>
 <style lang="scss" scoped>
+page {
+    background-color: #f4f4f4;
+}
 .day-item {
     min-height: 80px;
     padding: 10px 10px;
@@ -119,6 +126,7 @@ export class Index extends WxPage<IPageData> {
     border: 1px solid aquamarine;
     border-radius: 5px;
     position: relative;
+    background-color: #fff;
     .name {
         font-weight: bold;
         line-height: 30px;

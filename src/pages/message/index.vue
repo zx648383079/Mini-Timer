@@ -3,20 +3,26 @@
         <div class="box">
             <div class="message-item" v-for="(item, index) in items" :key="index">
                 <div class="icon-header">
-                    <span>系</span>
+                    <span>{{ item.bulletin.icon }}</span>
                 </div>
                 <div class="content">
                     <div class="name">
-                        <span>系统通知</span>
-                        <span>8小时前</span>
+                        <span>{{ item.bulletin.user_name }}</span>
+                        <span>{{ item.bulletin.created_at }}</span>
                     </div>
                     <div class="desc">
-                        十米哦  
+                        {{ item.bulletin.title }} 
                     </div>
                     <div class="footer">
                         <span>点击查看</span>
                     </div>
+                    <div class="un-read" v-if="item.status < 1">
+                        未读
+                    </div>
                 </div>
+            </div>
+            <div class="empty-box" v-if="items.length < 1">
+                暂无消息
             </div>
         </div>
     </div>
@@ -26,12 +32,13 @@ import {
     IMyApp
 } from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
-import { getTaskDayList } from '../../api/task';
+import { getBulletinList } from '../../api/bulletin';
+import { IBulletinUser } from '../../api/model';
 
 const app = getApp<IMyApp>();
 
 interface IPageData {
-    items: number[],
+    items: IBulletinUser[],
     page: number,
     hasMore: boolean,
     isLoading: boolean,
@@ -43,13 +50,14 @@ interface IPageData {
 })
 export class Index extends WxPage<IPageData> {
     public data: IPageData = {
-        items: [1, 2],
+        items: [],
         page: 1,
         hasMore: true,
         isLoading: false,
     };
 
     onLoad() {
+        this.tapRefresh();
     }
 
     onShow() {
@@ -82,7 +90,7 @@ export class Index extends WxPage<IPageData> {
         this.setData({
             isLoading: true
         });
-        getTaskDayList({
+        getBulletinList({
             page: page,
         }).then(res => {
             this.setData({
@@ -103,25 +111,22 @@ page {
     padding:10px;
     position:relative;
     background:#fff;
-    margin-top:10px;
-    overflow:hidden;
+    margin-bottom:10px;
     .icon-header {
         font-size:25px;
         color:#41C4FF;
         float:left;
         margin-right:15px;
         width:7%;
-        height:100px;
+        height: 80px;
         text {
             display: block;
-            width: 30px;
-            height: 30px;
-            margin-top: 10px;
+            line-height: 80px;
         }
         image {
             width: 30px;
             height: 30px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
     }
     .content {
@@ -129,12 +134,26 @@ page {
         .footer {
             font-size: 12px;
             color: #999;
+            text {
+                margin-right: 10px;
+            }
         }
         .desc {
             font-size: 14px;
+            line-height: 20px;
             padding: 10px 0;
             color: #000000;
+            overflow: hidden;
+            height: 40px;
         }
+    }
+    .un-read {
+        position: absolute;
+        font-size: 30px;
+        right: 20px;
+        opacity: .1;
+        top: 20px;
+        transform: rotate(30deg);
     }
 }
 </style>

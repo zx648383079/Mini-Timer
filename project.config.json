@@ -49,8 +49,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/message/index",
-					"pathName": "pages/message/index",
+					"name": "pages/task/index",
+					"pathName": "pages/task/index",
 					"query": "id=16",
 					"scene": null
 				}

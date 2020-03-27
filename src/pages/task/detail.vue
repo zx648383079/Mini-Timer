@@ -4,11 +4,12 @@
             <div class="timer-box">
                 {{ time }}
             </div>
-            <div class="timer-tip">{{ day.task.name }}</div>
+            <div class="timer-name">{{ day.task.name }}</div>
+            <timer class="timer-desc">{{ day.task.description }}</timer>
         </div>
 
         <div class="dialog-footer" v-if="day">
-            <div class="timer-play" title="开始计时" v-if="day.status == 5" @click="tapPlay">
+            <div class="timer-play" title="开始计时" v-if="day.status == 5 || day.status == 8" @click="tapPlay">
                 <i class="fa fa-play"></i>
                 <div class="label">开始计时</div>
             </div>
@@ -45,7 +46,7 @@ interface IPageData {
 @WxJson({
     navigationBarTitleText: "",
     navigationBarBackgroundColor: '#fff',
-    navigationBarTextStyle: 'white'
+    navigationBarTextStyle: 'black'
 })
 export class Detail extends WxPage<IPageData> {
     public data: IPageData = {
@@ -58,16 +59,12 @@ export class Detail extends WxPage<IPageData> {
     onLoad(option: any) {
         const id = option && option.id ? parseInt(option.id, 10) : 0;
         if (!id) {
-            wx.navigateBack({
-                delta: 0
-            });
+            wx.navigateBack();
             return;
         }
         getTaskDayInfo(id).then(res => {
             if (!res) {
-                wx.navigateBack({
-                    delta: 0
-                });
+                wx.navigateBack();
                 return;
             }
             this.setData({
@@ -122,7 +119,8 @@ export class Detail extends WxPage<IPageData> {
                 return;
             }
             this.setData({
-                day: res
+                day: res,
+                time: '00:00'
             });
             this._stop();
         });
@@ -186,9 +184,7 @@ export class Detail extends WxPage<IPageData> {
                         if (res.amount > 0) {
                             return;
                         }
-                        wx.navigateBack({
-                            delta: 0
-                        });
+                        wx.navigateBack();
                     }
                 });
             }
@@ -206,7 +202,8 @@ export class Detail extends WxPage<IPageData> {
     .timer-box {
         font-size: 60px;
     }
-    .timer-tip {
+    .timer-name,
+    .timer-desc {
         color: #ccc;
     }
 }

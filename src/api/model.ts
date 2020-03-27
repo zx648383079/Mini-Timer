@@ -77,6 +77,8 @@ export interface ITask {
     status?:      number;
     every_time?:  number;
     time_length?: number;
+    time_format?: string;
+    checked     ?: boolean;
 }
 
 export interface ITaskDay {
@@ -104,3 +106,32 @@ export interface ITaskLog {
     end_at:      number;
     created_at:  string;
 }
+
+export interface IBulletinUser {
+    id:          number;
+    bulletin_id: number;
+    status:      number;
+    created_at:  string;
+    updated_at:  string;
+    bulletin:    IBulletin;
+}
+
+export interface IBulletin {
+    id:         number;
+    title:      string;
+    content:    string;
+    type:       number;
+    user_id:    number;
+    created_at: string;
+    updated_at: string;
+    user?:      IUser;
+    user_name:  string;
+    icon:  string;
+}
+
+export interface IDriver {
+    id?: number;
+    name: string;
+    created_at: string;
+}
+

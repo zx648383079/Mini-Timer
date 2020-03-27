@@ -29,43 +29,44 @@ export interface IMyApp {
 
 @WxAppJson({
     pages: [
-        "pages/index/index",
-        "pages/member/index",
-        "pages/member/profile",
-        "pages/member/login",
-        "pages/member/cancel",
-        "pages/member/driver",
-        "pages/member/password",
-        "pages/member/edit",
-        "pages/help/index",
-        "pages/task/index",
-        "pages/task/edit",
-        "pages/task/detail",
-        "pages/message/index",
+        'pages/index/index',
+        'pages/member/index',
+        'pages/member/profile',
+        'pages/member/login',
+        'pages/member/cancel',
+        'pages/member/driver',
+        'pages/member/password',
+        'pages/member/edit',
+        'pages/help/index',
+        'pages/task/index',
+        'pages/task/edit',
+        'pages/task/detail',
+        'pages/message/index',
+        'pages/checkin/index'
     ],
     window: {
-        backgroundTextStyle: "light",
-        backgroundColor: "#f4f4f4",
-        navigationBarBackgroundColor: "#05a6b1",
-        navigationBarTitleText: "ZoDream Timer",
-        navigationBarTextStyle: "white"
+        backgroundTextStyle: 'light',
+        backgroundColor: '#f4f4f4',
+        navigationBarBackgroundColor: '#05a6b1',
+        navigationBarTitleText: 'ZoDream Timer',
+        navigationBarTextStyle: 'white'
     },
     tabBar: {
-        backgroundColor: "#fff",
-        borderStyle: "black",
-        selectedColor: "#b4282d",
-        color: "#666",
+        backgroundColor: '#fff',
+        borderStyle: 'black',
+        selectedColor: '#b4282d',
+        color: '#666',
         list: [{
-                pagePath: "pages/index/index",
-                iconPath: "images/icon/home.png",
-                selectedIconPath: "images/icon/home_red.png",
-                text: "首页"
+                pagePath: 'pages/index/index',
+                iconPath: 'images/icon/home.png',
+                selectedIconPath: 'images/icon/home_red.png',
+                text: '首页'
             },
             {
-                pagePath: "pages/member/index",
-                iconPath: "images/icon/user.png",
-                selectedIconPath: "images/icon/user_red.png",
-                text: "我的"
+                pagePath: 'pages/member/index',
+                iconPath: 'images/icon/user.png',
+                selectedIconPath: 'images/icon/user_red.png',
+                text: '我的'
             }
         ]
     }
@@ -257,7 +258,7 @@ $lineHeight: 2.5rem;
 
 .btn {
     padding: 0 30px;
-    background: #ff77ff;
+    background: #b4282d;
     border: none;
     display: inline-block;
     text-decoration: none;
@@ -571,5 +572,13 @@ $lineHeight: 2.5rem;
         border-radius: 50%;
         background-color: #1d8686;
     }
+}
+
+.empty-box {
+    line-height: 40px;
+    text-align: center;
+    font-size: 30px;
+    color: #999;
+    margin-top: 30vh;
 }
 </style>

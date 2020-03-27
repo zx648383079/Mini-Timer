@@ -41,11 +41,13 @@ export function twoPad(n: number): string {
   return str[1] ? str : '0' + str
 }
 
-export function formatHour(time: number, format?: string): string {
+export function formatHour(time: number, format?: string, isSecond = false): string {
     if (isNaN(time)) {
         time = 0;
     }
-    time = Math.floor(time / 1000);
+    if (!isSecond) {
+        time = Math.floor(time / 1000);
+    }
     let s = time % 60,
         m = format && format.indexOf('h') < 0 ? Math.floor(time / 60) : (Math.floor(time / 60) % 60),
         h = Math.floor(time / 3600);

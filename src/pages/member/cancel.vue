@@ -9,16 +9,20 @@
             {{ item }}
         </div>
 
-        <div class="btn del-btn">确定注销</div>
+        <div class="btn del-btn" @click="tapSubmit">确定注销</div>
     </div>
 </template>
 <script lang="ts">
 import { WxJson, WxPage } from '../../../typings/wx/lib.vue';
+import { cancelUser } from '../../api/user';
+import { IMyApp } from '../../app.vue';
 
 interface IPageData {
     items: string[],
     selected: number
 }
+
+const app = getApp<IMyApp>();
 
 @WxJson({
     navigationBarTitleText: "账户注销",
@@ -40,14 +44,33 @@ export default class Cancel extends WxPage<IPageData> {
     public onShow() {
         wx.showModal({
             title: '账户注销确认',
-            content: '账户注销后，您已完成的交易将无法售后。',
+            content: '账户注销后，您所有的记录将永远消失。',
             confirmText: '继续注销',
             cancelText: '暂不注销',
-            fail() {
-                wx.navigateBack({
-                    delta: 0
-                });
+            success(res) {
+                if (res.cancel) {
+                    wx.navigateBack();
+                }
             }
+        });
+    }
+
+    public tapSubmit() {
+        let data = this.data;
+        cancelUser({
+            reason: data.items[data.selected]
+        }).then(_ => {
+            app.logoutUser();
+            wx.showModal({
+                title: '提示',
+                content: '您的账户注销申请已提交，等待管理员确认。',
+                showCancel: false,
+                success() {
+                    wx.switchTab({
+                        url: '/pages/index/index'
+                    });
+                }
+            })
         });
     }
 }

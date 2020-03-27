@@ -1,4 +1,4 @@
-import { IPage, ITask, ITaskDay } from './model';
+import { IPage, ITask, ITaskDay, IDataOne } from './model';
 import { fetch, post } from '../utils/http';
 
 export const getTaskDayList = (param: any) => fetch<IPage<ITaskDay>>('task/home/today', param);
@@ -10,6 +10,10 @@ export const getTaskList = (param: any) => fetch<IPage<ITask>>('task', param);
 export const getTaskInfo = (id: number) => fetch<ITask>('task/home/detail', {id});
 
 export const saveTask = (param: ITask) => post<ITask>('task/home/save', param);
+
+export const batchAddTask = (id: number[]| number) => post<IDataOne<boolean>>('task/home/batch_add', {id});
+
+export const batchStopTask = (id: number[]| number) => post<IDataOne<boolean>>('task/home/batch_stop_task', {id});
 
 /**
  * 开始

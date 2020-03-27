@@ -9,6 +9,18 @@
   font-style: normal;
 }
 
+.fa-edit:before {
+  content: "\e8e4";
+}
+
+.fa-calendar-check:before {
+  content: "\e8d3";
+}
+
+.fa-calendar:before {
+  content: "\e8d6";
+}
+
 .fa-bell:before {
   content: "\e8cd";
 }
