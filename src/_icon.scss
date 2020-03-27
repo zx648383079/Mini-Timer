@@ -9,6 +9,10 @@
   font-style: normal;
 }
 
+.fa-feedback:before {
+  content: "\e8e0";
+}
+
 .fa-edit:before {
   content: "\e8e4";
 }

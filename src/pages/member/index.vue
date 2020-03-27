@@ -16,6 +16,7 @@
             <MenuItem class="item" title="签到" icon="fa-calendar" uri="/pages/checkin/index"/>
             <MenuItem class="item" title="我的消息" icon="fa-bell" uri="/pages/message/index"/>
             <MenuItem class="item" title="帮助" icon="fa-help" uri="/pages/help/index"/>
+            <MenuItem class="item" title="反馈" icon="fa-feedback" uri="/pages/feedback/index"/>
         </div>
         
     </div>

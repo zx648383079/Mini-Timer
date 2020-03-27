@@ -42,7 +42,8 @@ export interface IMyApp {
         'pages/task/edit',
         'pages/task/detail',
         'pages/message/index',
-        'pages/checkin/index'
+        'pages/checkin/index',
+        'pages/feedback/index',
     ],
     window: {
         backgroundTextStyle: 'light',

@@ -28,3 +28,5 @@ export const updateProfile = (param: any) => put<IUser>('auth/user/update', para
 
 
 export const uploadAvatar = (img: string) => uploadFile<IUser>(img, {url: 'auth/user/avatar'});
+
+export const saveFeedback = (param: any) => post<IDataOne<boolean>>('contact/home/feedback', param);
