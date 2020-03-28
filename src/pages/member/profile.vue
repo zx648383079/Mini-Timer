@@ -13,6 +13,11 @@
                     <span>{{user.name}}</span>
                     <i class="fa fa-chevron-right"></i>
                 </div>
+                <div class="line-item">
+                    <span>邮箱</span>
+                    <span>{{user.email}}</span>
+                    <i class="fa fa-chevron-right"></i>
+                </div>
                 <div class="line-item" @click="tapSex">
                     <span>性别</span>
                     <span>{{sex}}</span>
@@ -38,11 +43,15 @@
                     修改密码
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
-                <a class="item" href="driver">
+                <a class="item" href="/pages/account/connect">
+                    账户关联
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </a>
+                <a class="item" href="/pages/account/driver">
                     登陆设备管理
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
-                <a class="item" href="cancel">
+                <a class="item" href="/pages/account/cancel">
                     账户注销
                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                 </a>
@@ -156,7 +165,14 @@ export class Profile extends WxPage<IPageData> {
     public tapLogout() {
         app.logoutUser().then(() => {
             wx.switchTab({
-                url: '/pages/index/index'
+                url: '/pages/index/index',
+                success () { 
+                    let page = getCurrentPages().pop(); 
+                    if (!page) {
+                        return; 
+                    }
+                    page.onShow();
+            }
             });
         });
     }

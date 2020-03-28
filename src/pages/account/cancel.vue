@@ -14,7 +14,7 @@
 </template>
 <script lang="ts">
 import { WxJson, WxPage } from '../../../typings/wx/lib.vue';
-import { cancelUser } from '../../api/user';
+import { cancelUser } from '../../api/account';
 import { IMyApp } from '../../app.vue';
 
 interface IPageData {

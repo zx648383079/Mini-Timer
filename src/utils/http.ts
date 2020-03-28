@@ -4,17 +4,24 @@ import { IMyApp } from "../app.vue";
 
 const app = getApp<IMyApp>();
 
-interface IRequest {
-    url: string;
-    params?: any;  // 拼接到url上
-    data?: any;    // post 数据
+interface IRequestOption {
     headers?: any;
     mask?: boolean;
     loading?: boolean;
+    guest?: boolean; // token失效不自动跳转
 }
 
-export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT', requestHandler: IRequest) {
-    let { url, params, data, headers, mask, loading } = requestHandler;
+interface IRequest extends IRequestOption {
+    url: string;
+    params?: any;  // 拼接到url上
+    data?: any;    // post 数据
+}
+
+export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 'DELETE' | 'TRACE' | 'CONNECT', requestHandler: IRequest, option?: IRequestOption) {
+    if (option) {
+        requestHandler = Object.assign(requestHandler, option);
+    }
+    let { url, params, data, headers, mask, loading, guest } = requestHandler;
     if (loading === undefined || loading) {
       wx.showLoading && wx.showLoading({title: 'Loading...', mask: mask ? mask : false})
     }
@@ -47,16 +54,20 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
                     resolve(data as any);
                     return;
                 }
-                wx.showToast({
-                    title: (data as any).message,
-                    icon: 'none',
-                    duration: 2000
-                });
+                if (statusCode !== 401 || !guest) {
+                    wx.showToast({
+                        title: (data as any).message,
+                        icon: 'none',
+                        duration: 2000
+                    });
+                }
                 if (statusCode === 401) {
                     app && app.setToken();
-                    wx.navigateTo({
-                        url: '/pages/member/login'
-                    });
+                    if (!guest) {
+                        wx.navigateTo({
+                            url: '/pages/member/login'
+                        });
+                    }
                 }
                 // 处理数据
                 reject(res)
@@ -79,12 +90,11 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
  * @param loading 是否显示加载中
  * @returns {Promise}
  */
-export function fetch<T>(url: string, params = {}, loading?: boolean): Promise<T> {
+export function fetch<T>(url: string, params = {}, option?: IRequestOption): Promise<T> {
     return request<T>('GET', {
         url,
         params,
-        loading,
-    });
+    }, option);
 }
 
 /**
@@ -94,11 +104,10 @@ export function fetch<T>(url: string, params = {}, loading?: boolean): Promise<T
  * @param loading 是否显示加载中
  * @returns {Promise}
  */
-export function post<T>(url: string, data = {}, loading?: boolean): Promise<T> {
+export function post<T>(url: string, data = {}, option?: IRequestOption): Promise<T> {
     return request<T>('POST', {
         url,
         data,
-        loading,
     });
 }
 /**
@@ -106,11 +115,10 @@ export function post<T>(url: string, data = {}, loading?: boolean): Promise<T> {
  * @param url 
  * @param loading 是否显示加载中
  */
-export function deleteRequest<T>(url: string, loading?: boolean): Promise<T> {
+export function deleteRequest<T>(url: string, option?: IRequestOption): Promise<T> {
     return request<T>('DELETE', {
         url,
-        loading,
-    });
+    }, option);
 }
 
 /**
@@ -120,12 +128,11 @@ export function deleteRequest<T>(url: string, loading?: boolean): Promise<T> {
  * @param loading 是否显示加载中
  * @returns {Promise}
  */
-export function put<T>(url: string, data = {}, loading?: boolean) {
+export function put<T>(url: string, data = {}, option?: IRequestOption) {
     return request<T>('PUT', {
         url,
         data,
-        loading,
-    });
+    }, option);
 }
 
 /**

@@ -1,9 +1,7 @@
 import {fetch, post, uploadFile, put} from '../utils/http';
-import {IUser, ILogin, IData, IDataOne, IRegister, IDriver,} from './model';
+import {IUser, ILogin, IDataOne, IRegister} from './model';
 
 export const getProfile = () => fetch<IUser>('auth/user');
-
-export const getDriver = () => fetch<IData<IDriver>>('auth/user/driver');
 
 export const login = (param: ILogin) => post<IUser>('auth/login', param);
 
@@ -13,7 +11,7 @@ export const logout = () => fetch('auth/logout');
 
 export const register = (param: IRegister) => post<IUser>('auth/register', param);
 
-export const cancelUser = (param: any) => post<IUser>('auth/user/cancel', param);
+
 
 export const sendFindEmail = (email: string) => post<IDataOne<boolean>>('auth/password/send_find_email', {
     email
@@ -29,4 +27,3 @@ export const updateProfile = (param: any) => put<IUser>('auth/user/update', para
 
 export const uploadAvatar = (img: string) => uploadFile<IUser>(img, {url: 'auth/user/avatar'});
 
-export const saveFeedback = (param: any) => post<IDataOne<boolean>>('contact/home/feedback', param);

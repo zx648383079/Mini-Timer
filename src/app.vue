@@ -33,8 +33,8 @@ export interface IMyApp {
         'pages/member/index',
         'pages/member/profile',
         'pages/member/login',
-        'pages/member/cancel',
-        'pages/member/driver',
+        'pages/account/cancel',
+        'pages/account/driver',
         'pages/member/password',
         'pages/member/edit',
         'pages/help/index',
@@ -44,6 +44,7 @@ export interface IMyApp {
         'pages/message/index',
         'pages/checkin/index',
         'pages/feedback/index',
+        'pages/account/connect'
     ],
     window: {
         backgroundTextStyle: 'light',
@@ -102,12 +103,15 @@ export class Application extends WxApp<IAppData> implements IMyApp {
     }
 
     public setUser(user: IUser| null) {
+        if (user && user.token && user.token.length > 0 && user.id && user.id > 0) {
+            this.setToken(user.token);
+        }
         this.globalData.user = user;
     }
 
     public setToken(token?: string) {
-        this.globalData.token = token ? token : null;
-        if (!token) {
+        this.globalData.token = token && token.length > 0 ? token : null;
+        if (!this.globalData.token) {
             wx.removeStorageSync(TOKEN_KEY);
             this.globalData.user = null;
             return;
@@ -116,22 +120,23 @@ export class Application extends WxApp<IAppData> implements IMyApp {
     }
     public loginUser(params: ILogin) {
         return login(params).then((res: IUser) => {
-            this.setToken(res.token);
-            this.globalData.user = res;
+            this.setUser(res);
+            return res;
         });
     }
     public authloginUser(params: any) {
         return authLogin(params).then((res: IUser) => {
-            this.setToken(res.token);
-            return this.globalData.user = res;
+            this.setUser(res);
+            return res;
         });
     }
     public registerUser(params: IRegister) {
         return register(params).then((res: IUser) => {
-            this.setToken(res.token);
-            this.globalData.user = res;
+            this.setUser(res);
+            return res;
         });
     }
+
     public sendFindEmail(email: string) {
         return sendFindEmail(email);
     }
@@ -222,17 +227,15 @@ $lineHeight: 2.5rem;
         position: relative;
         line-height: 1.875rem;
 
-        .fa {
+        >.fa {
             position: absolute;
             right: 0.3125rem;
             top: 0;
         }
 
-        span {
-            &:nth-child(2) {
-                float: right;
-                margin-right: 1.25rem;
-            }
+        .label {
+            float: right;
+            margin-right: 1.25rem;
         }
     }
 }

@@ -5,6 +5,8 @@
                 <div class="name">{{ item.task.name }}</div>
                 <div class="desc">{{ item.task.description }}</div>
                 <div class="count" v-if="item.amount > 1">{{ item.amount }}</div>
+                <div class="tip" v-if="item.status === 9">进行中</div>
+                <div class="tip" v-if="item.status === 8">暂停中</div>
             </div>
 
             <div class="empty-box" v-if="items.length < 1">
@@ -49,12 +51,12 @@ export class Index extends WxPage<IPageData> {
     };
 
     onLoad() {
-        this.setData({
-            isGuest: !app.globalData.token
-        });
     }
 
     onShow() {
+        this.setData({
+            isGuest: !app.globalData.token
+        });
         this.tapRefresh();
     }
 
@@ -78,7 +80,7 @@ export class Index extends WxPage<IPageData> {
     }
 
     public goPage(page: number) {
-        if (this.data.isLoading) {
+        if (this.data.isLoading || this.data.isGuest) {
             return;
         }
         this.setData({
@@ -148,6 +150,13 @@ page {
         text-align: center;
         background-color: rgba($color: red, $alpha: .6);
         color: #fff;
+    }
+    .tip {
+        position: absolute;
+        font-size: 30px;
+        right: 0;
+        opacity: .1;
+        top: 0;
     }
 }
 </style>

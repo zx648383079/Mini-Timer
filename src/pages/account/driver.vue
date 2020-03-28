@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import { WxPage, WxJson } from "../../../typings/wx/lib.vue";
-import { getDriver } from "../../api/user";
+import { getDriver } from "../../api/account";
 import { IDriver } from "../../api/model";
 
 

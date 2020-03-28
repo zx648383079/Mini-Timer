@@ -8,7 +8,7 @@
                 <input type="text" name="name" required autocomplete="off" v-model="name" placeholder="请输入昵称">
             </div>
             <div class="input-box">
-                <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入账号">
+                <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入邮箱">
             </div>
             <div class="input-box">
                 <input type="password" name="password" required autocomplete="off" v-model="password" placeholder="请输入密码">
@@ -120,7 +120,14 @@ export class EmailRegister extends WxComponent<IComponentData>  {
             password,
             rePassword,
             agree
-        }).then(_ => {
+        }).then(res => {
+            if (!res || !res.token) {
+                wx.showToast({
+                    icon: 'none',
+                    title: '未知错误'
+                });
+                return;
+            }
             this.triggerEvent('back');
         });
     }

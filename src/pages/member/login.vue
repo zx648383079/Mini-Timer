@@ -66,7 +66,7 @@ export class Index extends WxPage<IPageData> {
     public tapLoginBack() {
         wx.switchTab({
             url: '/pages/index/index',
-            success: function () { 
+            success () { 
                 let page = getCurrentPages().pop(); 
                 if (!page) {
                     return; 
@@ -78,7 +78,7 @@ export class Index extends WxPage<IPageData> {
 
     public authLogin(code: string, nickname: string, avatar: string, gender: number) {
         app.authloginUser({code, nickname, avatar, gender}).then(res => {
-            if (res) {
+            if (res && res.token && res.id > 0) {
                 this.tapLoginBack();
             }
         });

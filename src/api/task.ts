@@ -1,7 +1,7 @@
 import { IPage, ITask, ITaskDay, IDataOne } from './model';
 import { fetch, post } from '../utils/http';
 
-export const getTaskDayList = (param: any) => fetch<IPage<ITaskDay>>('task/home/today', param);
+export const getTaskDayList = (param: any) => fetch<IPage<ITaskDay>>('task/home/today', param, {guest: true});
 
 export const getTaskDayInfo = (id: number) => fetch<ITaskDay>('task/home/detail_day', {id});
 
@@ -35,4 +35,4 @@ export const stopTask = (id: number) => post<ITaskDay>('task/home/stop', {id});
  * 验证
  * @param id day_id
  */
-export const checkTask = (id: number) => post<ITaskDay>('task/home/check', {id}, false);
+export const checkTask = (id: number) => post<ITaskDay>('task/home/check', {id}, {loading: false});

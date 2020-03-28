@@ -52,6 +52,15 @@ export interface ILogin {
     code?: string;
 }
 
+export interface IConnect {
+    id?: number,
+    vendor?: string,
+    nickname?: string,
+    created_at?: string,
+    name?: string,
+    icon?: string;
+}
+
 export interface IRegister {
     name: string;
     email?: string;

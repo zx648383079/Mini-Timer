@@ -169,6 +169,7 @@ export class Detail extends WxPage<IPageData> {
         this._stop();
         checkTask(data.day.id).then(res => {
             if (!res || !res.id) {
+                this._begin();
                 return;
             }
             this.setData({

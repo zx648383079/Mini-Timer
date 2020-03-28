@@ -72,7 +72,14 @@ export class EmailLogin extends WxComponent<IComponentData>  {
             });
             return;
         }
-        app.loginUser({email, password}).then(_ => {
+        app.loginUser({email, password}).then(res => {
+            if (!res || !res.token) {
+                wx.showToast({
+                    icon: 'none',
+                    title: '未知错误'
+                });
+                return;
+            }
             this.triggerEvent('back');
         });
     }
