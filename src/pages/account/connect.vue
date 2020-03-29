@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="account-box">
-            <div class="line-item" v-for="(item, index) in items" :key="index" :class="{active: item.id}">
+            <div class="line-item" v-for="(item, index) in items" :key="index" :class="{active: item.id}" @click="tapBind(index)">
                 <span class="vendor"><i :class="['fa', item.icon]"></i>{{ item.name }}</span>
                 <span class="label">{{ item.id ? '已绑(' + item.nickname + ')' : '未绑定' }}</span>
                 <i class="fa fa-chevron-right"></i>
@@ -43,6 +43,19 @@ export class Center extends WxPage<IPageData> {
                 items: res.data
             });
         }); 
+    }
+
+    public tapBind(i: number) {
+        const item = this.data.items[i];
+        if (item.name !== '微信小程序') {
+            return;
+        }
+        if (item.id && item.id > 0) {
+            return;
+        }
+        wx.navigateTo({
+            url: 'bind'
+        });
     }
 }
 </script>

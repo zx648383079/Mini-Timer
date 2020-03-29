@@ -17,9 +17,17 @@ export const sendFindEmail = (email: string) => post<IDataOne<boolean>>('auth/pa
     email
 });
 
-export const updatePassword = (oldPassword: string, password: string) => post<IUser>('auth/password/update', {
-    old_password: oldPassword,
+export const resetPassword = (email: string, code: string,  password: string, confirm_password: string) => post<IDataOne<boolean>>('auth/password/reset', {
+    email,
+    code,
     password,
+    confirm_password
+});
+
+export const updatePassword = (old_password: string, password: string, confirm_password: string) => post<IDataOne<boolean>>('auth/password/update', {
+    old_password,
+    password,
+    confirm_password
 });
 
 export const updateProfile = (param: any) => put<IUser>('auth/user/update', param);

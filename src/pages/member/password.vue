@@ -5,7 +5,7 @@
             <i class="fa fa-check" @click="tapSubmit"></i>
         </div>
         <div class="input-box">
-            <input type="password" placeholder="旧密码" required  v-model="oldpassword">
+            <input type="password" placeholder="旧密码(未设可随便填入6位字符)" required  v-model="oldpassword">
         </div>
         <div class="input-box">
             <input type="password" placeholder="新密码" required v-model="password">
@@ -73,9 +73,16 @@ export default class Password extends WxPage<IPageData> {
             });
             return;
         }
-        updatePassword(this.data.oldpassword, this.data.password)
-            .then(res => {
-            app.setUser(res);
+        updatePassword(data.oldpassword, data.password, data.repassword)
+            .then(_ => {
+                wx.showToast({
+                    title: '密码修改成功！'
+                });
+                app.logoutUser().then(() => {
+                    wx.navigateTo({
+                        url: 'login'
+                    })
+                });
         });
     }
 }

@@ -100,7 +100,7 @@ export class EmailRegister extends WxComponent<IComponentData>  {
             });
             return;
         }
-        if (!password || password.length < 4) {
+        if (!password || password.length < 6) {
             wx.showToast({
                 icon: 'none',
                 title: '请输入密码'

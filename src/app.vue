@@ -37,14 +37,18 @@ export interface IMyApp {
         'pages/account/driver',
         'pages/member/password',
         'pages/member/edit',
-        'pages/help/index',
+        'pages/article/index',
+        'pages/article/category',
+        'pages/article/detail',
         'pages/task/index',
         'pages/task/edit',
         'pages/task/detail',
         'pages/message/index',
         'pages/checkin/index',
         'pages/feedback/index',
-        'pages/account/connect'
+        'pages/account/connect',
+        'pages/account/bind',
+        'pages/authorize/index'
     ],
     window: {
         backgroundTextStyle: 'light',
@@ -321,41 +325,7 @@ $lineHeight: 2.5rem;
         width: 100%;
     }
 
-    .login-oauth-box {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        bottom: 40px;
-        text-align: center;
-        font-size: 20px;
-
-        navigator {
-            display: inline-block;
-            padding: 0 10px;
-
-            &:not(:last-child) {
-                border-right: $hr;
-            }
-        }
-        button {
-            display: inline-block;
-            background-color: transparent;
-            border: 0;
-            width: 3rem;
-            line-height: 3rem;
-            height: 3rem;
-            color: #333;
-            border: none;
-            margin:0;
-            padding: 0;
-            &:hover {
-                background-color: transparent;
-            }
-        }
-        .fa {
-            font-size: 2rem;
-        }
-    }
+    
 
     .input-group {
         text-align: left;
@@ -378,6 +348,42 @@ $lineHeight: 2.5rem;
                 top: 3px;
             }
         }
+    }
+}
+
+.login-oauth-box {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    bottom: 40px;
+    text-align: center;
+    font-size: 20px;
+
+    navigator {
+        display: inline-block;
+        padding: 0 10px;
+
+        &:not(:last-child) {
+            border-right: $hr;
+        }
+    }
+    button {
+        display: inline-block;
+        background-color: transparent;
+        border: 0;
+        width: 3rem;
+        line-height: 3rem;
+        height: 3rem;
+        color: #333;
+        border: none;
+        margin:0;
+        padding: 0;
+        &:hover {
+            background-color: transparent;
+        }
+    }
+    .fa {
+        font-size: 2rem;
     }
 }
 
@@ -445,6 +451,15 @@ $lineHeight: 2.5rem;
         display: block;
         text-align: center;
         background-color: $red;
+        color: $white;
+    }
+    &.primary-btn {
+        margin: 0.875rem;
+        box-sizing: border-box;
+        padding: 0.375rem;
+        display: block;
+        text-align: center;
+        background-color: $headerBg;
         color: $white;
     }
 }

@@ -6,7 +6,7 @@
         <div class="email-password">
             <form bindsubmit="formSubmit" >
                 <div class="input-box">
-                    <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入账号">
+                    <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入邮箱">
                 </div>
                 <div class="input-box">
                     <input type="password" name="password" required autocomplete="off" @keyup="tapKey" v-model="password" placeholder="请输入密码">

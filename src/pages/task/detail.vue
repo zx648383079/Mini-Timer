@@ -175,6 +175,7 @@ export class Detail extends WxPage<IPageData> {
             this.setData({
                 day: res
             });
+            wx.vibrateLong();
             if (res.tip) {
                 wx.showModal({
                     title: '提示',

@@ -144,3 +144,36 @@ export interface IDriver {
     created_at: string;
 }
 
+export interface IQrToken {
+    id: number,
+    token: string,
+    status: number,
+    expired_at: number,
+}
+
+export interface IArticle {
+    id: number,
+    title: string,
+    description: string,
+    content?: string,
+    comment_count: number,
+    recommend: number,
+    click_count: number,
+    user: IUser,
+    term: IArticleCategory
+}
+
+export interface IArticleCategory {
+    id: number,
+    name: string,
+    thumb: string,
+    blog_count: number
+}
+
+export interface IArticleComment {
+    id: number,
+    content?: string,
+    recommend_count: number,
+    user: IUser,
+}
+

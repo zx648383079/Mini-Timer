@@ -5,9 +5,20 @@
         </div>
         <form bindsubmit="formSubmit" >
             <div class="input-box">
-                <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入账号">
+                <input type="email" name="email" required autocomplete="off" v-model="email" placeholder="请输入邮箱" :disabled="isSended">
             </div>
-            <button form-type="submit">发送验证邮件</button>
+            <div class="reset-box" v-if="isSended">
+                <div class="input-box">
+                    <input type="text" name="code" autocomplete="off" v-model="code" placeholder="请输入安全码">
+                </div>
+                <div class="input-box">
+                    <input type="password" name="password" autocomplete="off" v-model="password" placeholder="请输入密码">
+                </div>
+                <div class="input-box">
+                    <input type="password" name="rePassword" required autocomplete="off" v-model="rePassword" placeholder="请确认密码">
+                </div>
+            </div>
+            <button form-type="submit">{{isSended ? '重置密码' : '发送验证邮件'}}</button>
             <span class="right" @click="tapMode" data-mode="0">返回登录</span>
         </form>
     </div>
@@ -15,9 +26,14 @@
 <script lang="ts">
 import { WxComponent, WxJson, WxMethod, TouchEvent } from "../../../../typings/wx/lib.vue";
 import { IMyApp } from "../../../app.vue";
+import { resetPassword } from "../../../api/user";
 
 interface IComponentData {
     email: string,
+    code: string,
+    password: string,
+    rePassword: string,
+    isSended: boolean,
 }
 
 const app = getApp<IMyApp>();
@@ -33,6 +49,10 @@ export class EmailFind extends WxComponent<IComponentData>  {
 
     public data = {
         email: '',
+        code: '',
+        password: '',
+        rePassword: '',
+        isSended: false
     };
 
     @WxMethod()
@@ -45,8 +65,61 @@ export class EmailFind extends WxComponent<IComponentData>  {
     }
 
     @WxMethod()
-    formSubmit(e: any) {
-        const email = e.detail.value.email;
+    formSubmit() {
+        const data = this.data;
+        const email = data.email;
+        if (!data.isSended) {
+            this.tapSendEmail(email);
+            return;
+        }
+        const password = data.password;
+        const rePassword = data.rePassword;
+        const code = data.code;
+        if (!email || !/.+@.+/.test(email)) {
+            wx.showToast({
+                icon: 'none',
+                title: '请输入邮箱'
+            });
+            return;
+        }
+        if (!password || password.length < 6) {
+            wx.showToast({
+                icon: 'none',
+                title: '请输入密码'
+            });
+            return;
+        }
+        if (rePassword !== password) {
+            wx.showToast({
+                icon: 'none',
+                title: '两次密码不一致'
+            });
+            return;
+        }
+        if (!code || code.length < 4) {
+            wx.showToast({
+                icon: 'none',
+                title: '请输入正确的安全码'
+            });
+            return;
+        }
+        resetPassword(
+            email,
+            code,
+            password,
+            rePassword).then(_ => {
+            wx.showToast({
+                title: '密码重置成功！'
+            });
+            this.setData({
+                isSended: false
+            });
+            this.triggerEvent('click', 0);
+        });
+    }
+
+    @WxMethod()
+    tapSendEmail(email: string) {
         if (!email || !/.+@.+/.test(email)) {
             wx.showToast({
                 icon: 'none',
@@ -58,7 +131,9 @@ export class EmailFind extends WxComponent<IComponentData>  {
             wx.showToast({
                 title: '发送成功，请查看邮件'
             });
-            this.triggerEvent('click', 0);
+            this.setData({
+                isSended: true
+            });
         });
     }
 

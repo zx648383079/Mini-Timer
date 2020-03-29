@@ -13,9 +13,10 @@
         </div>
 
         <div class="menu-list">
+            <MenuItem class="item" title="扫一扫" icon="fa-scan" @click="tapScan" v-if="user"/>
             <MenuItem class="item" title="签到" icon="fa-calendar" uri="/pages/checkin/index"/>
             <MenuItem class="item" title="我的消息" icon="fa-bell" uri="/pages/message/index"/>
-            <MenuItem class="item" title="帮助" icon="fa-help" uri="/pages/help/index"/>
+            <MenuItem class="item" title="帮助" icon="fa-help" uri="/pages/article/index"/>
             <MenuItem class="item" title="反馈" icon="fa-feedback" uri="/pages/feedback/index"/>
         </div>
         
@@ -69,6 +70,18 @@ export class Index extends WxPage<IPageData> {
         }
         wx.navigateTo({
             url: 'profile'
+        });
+    }
+
+    public tapScan() {
+        wx.scanCode({
+            scanType: ['qrCode'],
+            onlyFromCamera: true,
+            success(res) {
+                wx.navigateTo({
+                    url: '/pages/authorize/index?token=' + encodeURIComponent(res.result)
+                });
+            }
         });
     }
 }
