@@ -73,11 +73,17 @@ export class Detail extends WxPage<IPageData> {
             if (res.status === 9) {
                 this._begin();
             }
+            wx.setKeepScreenOn({
+                keepScreenOn: true
+            });
         })
     }
 
     onUnload() {
         this._stop();
+        wx.setKeepScreenOn({
+            keepScreenOn: false
+        });
     }
 
     public tapPlay() {

@@ -55,7 +55,7 @@ export default class Password extends WxPage<IPageData> {
 
     public authLogin(code: string, nickname: string, avatar: string, gender: number) {
         app.authloginUser({code, nickname, avatar, gender}).then(res => {
-            if (res && res.token && res.id > 0) {
+            if (res && res.id > 0) {
                 wx.showToast({
                     title: '绑定成功'
                 });

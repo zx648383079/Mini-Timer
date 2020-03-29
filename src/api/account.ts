@@ -2,7 +2,7 @@ import {fetch, post, } from '../utils/http';
 import {IData, IDataOne, IDriver, IConnect, IUser} from './model';
 
 
-export const getConnect = () => fetch<IData<IConnect>>('shop/account/connect');
+export const getConnect = () => fetch<IData<IConnect>>('auth/account/connect');
 
 export const getDriver = () => fetch<IData<IDriver>>('auth/account/driver');
 
