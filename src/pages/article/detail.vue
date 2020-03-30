@@ -50,6 +50,20 @@ export class Detail extends WxPage<IPageData> {
             wx.navigateBack();
         });
     }
+
+    public onPageScroll(e: any) {
+        let article = this.data.article;
+        if (!article) {
+            return;
+        }
+        let title = '';
+        if (e.scrollTop > 100) {
+            title = article.title;
+        }
+        wx.setNavigationBarTitle({
+            title: title
+        });
+    }
 }
 </script>
 <style lang="scss" scoped>

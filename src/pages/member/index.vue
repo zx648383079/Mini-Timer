@@ -2,7 +2,7 @@
     <div>
         <div class="user-header">
             <div class="avatar" @click="tapProfile">
-                <img :src="user ? user.avatar : '/images/avatar.png'">
+                <img :src="user ? user.avatar : '/images/logo.png'">
             </div>
             <div class="name">
                 欢迎您，
