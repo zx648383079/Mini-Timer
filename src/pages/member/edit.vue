@@ -72,7 +72,15 @@ export default class Password extends WxPage<IPageData> {
             [data.field]: data.value
         }).then(res => {
             app.setUser(res);
-            wx.navigateBack();
+            wx.navigateBack({
+                success() {
+                    let page = getCurrentPages().pop(); 
+                    if (!page) {
+                        return; 
+                    }
+                    page.onLoad();
+                }
+            });
         });
     }
 }
