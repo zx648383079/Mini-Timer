@@ -17,14 +17,9 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 import { getTaskInfo, saveTask } from '../../api/task';
 import { ITask } from '../../api/model';
-
-const app = getApp<IMyApp>();
 
 interface IPageData {
     info: ITask

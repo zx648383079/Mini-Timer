@@ -13,14 +13,9 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 import { IArticleCategory } from '../../api/model';
 import { getCategories } from '../../api/article';
-
-const app = getApp<IMyApp>();
 
 interface IPageData {
     items: IArticleCategory[],

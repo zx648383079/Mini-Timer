@@ -28,14 +28,9 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 import { getBulletinList } from '../../api/bulletin';
 import { IBulletinUser } from '../../api/model';
-
-const app = getApp<IMyApp>();
 
 interface IPageData {
     items: IBulletinUser[],

@@ -1,5 +1,5 @@
 import * as util from "./util";
-import { TOKEN_KEY } from "./types";
+import { TOKEN_KEY, LOGIN_PATH } from "./types";
 import { IMyApp } from "../app.vue";
 
 const app = getApp<IMyApp>();
@@ -48,7 +48,7 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             }, headers),
-            success: function (res) {
+            success(res) {
                 const { data, statusCode } = res;
                 if (statusCode === 200) {
                     resolve(data as any);
@@ -65,18 +65,20 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
                     app && app.setToken();
                     if (!guest) {
                         wx.navigateTo({
-                            url: '/pages/member/login'
+                            url: LOGIN_PATH
                         });
                     }
                 }
                 // 处理数据
                 reject(res)
             },
-            fail: function () {
+            fail() {
                 reject('Network request failed')
             },
-            complete: function () {
-                wx.hideLoading && wx.hideLoading()
+            complete() {
+                if ((loading === undefined || loading) && wx.hideLoading) {
+                    wx.hideLoading();
+                }
             }
         })
     });
@@ -142,7 +144,7 @@ export function put<T>(url: string, data = {}, option?: IRequestOption) {
  * @param name 上传文件的对应的 key
  */
 export function uploadFile<T>(file: string, requestHandler: IRequest, name: string = 'file'): Promise<T> {
-    let { url, params, data, headers, mask, loading } = requestHandler;
+    let { url, params, data, headers, mask, loading, guest } = requestHandler;
     if (loading === undefined || loading) {
       wx.showLoading && wx.showLoading({title: 'Loading...', mask: mask ? mask : false})
     }
@@ -169,31 +171,37 @@ export function uploadFile<T>(file: string, requestHandler: IRequest, name: stri
             header: Object.assign({
                 'Accept': 'application/json',
             }, headers),
-            success: function (res) {
+            success(res) {
                 const { data, statusCode } = res;
                 if (statusCode === 200) {
                     resolve(data as any);
                     return;
                 }
-                wx.showToast({
-                    title: (data as any).message,
-                    icon: 'none',
-                    duration: 2000
-                });
+                if (statusCode !== 401 || !guest) {
+                    wx.showToast({
+                        title: (data as any).message,
+                        icon: 'none',
+                        duration: 2000
+                    });
+                }
                 if (statusCode === 401) {
                     app && app.setToken();
-                    wx.navigateTo({
-                        url: '/pages/member/login'
-                    });
+                    if (!guest) {
+                        wx.navigateTo({
+                            url: LOGIN_PATH
+                        });
+                    }
                 }
                 // 处理数据
                 reject(res)
             },
-            fail: function () {
+            fail() {
                 reject('Network request failed')
             },
-            complete: function () {
-                wx.hideLoading && wx.hideLoading()
+            complete() {
+                if ((loading === undefined || loading) && wx.hideLoading) {
+                    wx.hideLoading();
+                }
             }
         })
     });

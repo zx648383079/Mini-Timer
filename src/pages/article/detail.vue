@@ -14,14 +14,9 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
 import { IArticle } from '../../api/model';
 import { getArticle } from '../../api/article';
-
-const app = getApp<IMyApp>();
 
 interface IPageData {
     article: IArticle | null,
@@ -49,6 +44,16 @@ export class Detail extends WxPage<IPageData> {
         }, () => {
             wx.navigateBack();
         });
+    }
+
+    public onShareAppMessage() {
+        let article = this.data.article;
+        if (!article) {
+            return {};
+        }
+        return {
+            title: article.title,
+        };
     }
 
     public onPageScroll(e: any) {

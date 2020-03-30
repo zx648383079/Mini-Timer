@@ -10,14 +10,9 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { IConnect } from '../../api/model';
 import { getConnect } from '../../api/account';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
-
-const app = getApp<IMyApp>();
 
 interface IPageData {
     items: IConnect[]

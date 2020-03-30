@@ -15,7 +15,7 @@
                 </div>
                 <div class="line-item">
                     <span>邮箱</span>
-                    <span>{{user.email}}</span>
+                    <span class="auto-hide">{{user.email}}</span>
                     <i class="fa fa-chevron-right"></i>
                 </div>
                 <div class="line-item" @click="tapSex">
@@ -195,5 +195,12 @@ export class Profile extends WxPage<IPageData> {
             }
         }
     }
+}
+.auto-hide {
+    max-width: 600rpx;
+    overflow: hidden;
+    word-wrap: unset;
+    word-break: keep-all;
+    height: 1.875rem;
 }
 </style>

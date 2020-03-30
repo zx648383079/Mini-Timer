@@ -36,15 +36,10 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { WxPage, WxJson, TouchEvent } from '../../../typings/wx/lib.vue';
 import { ITask } from '../../api/model';
 import { getTaskList, batchAddTask, batchStopTask } from '../../api/task';
 import { formatHour } from '../../utils/util';
-
-const app = getApp<IMyApp>();
 
 interface IPageData {
     status: number;
@@ -312,6 +307,7 @@ page {
     height: 40px;
     background-color: #fff;
     line-height: 40px;
+    border-top: 1px solid #ccc;
     .add-btn,
     .stop-btn,
     .cancel-btn {

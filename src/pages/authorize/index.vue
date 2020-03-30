@@ -23,7 +23,7 @@
 import { WxPage, WxJson } from "../../../typings/wx/lib.vue";
 import { IUser } from "../../api/model";
 import { IMyApp } from "../../app.vue";
-import { checkQrToken, authorizeQrToken } from '../../api/authorize';
+import { authorizeQrToken } from '../../api/authorize';
 
 
 interface IPageData {
