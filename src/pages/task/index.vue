@@ -11,7 +11,7 @@
                 <div class="desc">{{ item.description }}</div>
                 <div class="time">{{ item.time_format }}</div>
             </div>
-            <div class="footer-tip" v-show="!hasMore">
+            <div class="no-more-tip" v-show="!hasMore">
                 我是有底线的
             </div>
         </div>
@@ -275,12 +275,6 @@ page {
             display: none;
         }
     }
-}
-
-.footer-tip {
-    text-align: center;
-    color: #ccc;
-    line-height: 60px;
 }
 
 .edit-icon {

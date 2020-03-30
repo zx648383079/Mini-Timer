@@ -50,6 +50,7 @@ export interface IMyApp {
         'pages/account/bind',
         'pages/authorize/index',
         'pages/setting/index',
+        'pages/record/index',
     ],
     window: {
         backgroundTextStyle: 'light',
@@ -68,6 +69,12 @@ export interface IMyApp {
                 iconPath: 'images/icon/home.png',
                 selectedIconPath: 'images/icon/home_red.png',
                 text: '首页'
+            },
+            {
+                pagePath: 'pages/record/index',
+                iconPath: 'images/icon/time.png',
+                selectedIconPath: 'images/icon/time_red.png',
+                text: '时间薄'
             },
             {
                 pagePath: 'pages/member/index',
@@ -600,5 +607,11 @@ $lineHeight: 2.5rem;
     font-size: 30px;
     color: #999;
     margin-top: 30vh;
+}
+
+.no-more-tip {
+    text-align: center;
+    color: #ccc;
+    line-height: 60px;
 }
 </style>

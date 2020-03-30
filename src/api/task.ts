@@ -1,4 +1,4 @@
-import { IPage, ITask, ITaskDay, IDataOne } from './model';
+import { IPage, ITask, ITaskDay, IDataOne, ITaskLog } from './model';
 import { fetch, post } from '../utils/http';
 
 export const getTaskDayList = (param: any) => fetch<IPage<ITaskDay>>('task/home/today', param, {guest: true});
@@ -6,6 +6,9 @@ export const getTaskDayList = (param: any) => fetch<IPage<ITaskDay>>('task/home/
 export const getTaskDayInfo = (id: number) => fetch<ITaskDay>('task/home/detail_day', {id});
 
 export const getTaskList = (param: any) => fetch<IPage<ITask>>('task', param);
+
+export const getTaskLogList = (param: any) => fetch<IPage<ITaskLog>>('task/review', param);
+
 
 export const getTaskInfo = (id: number) => fetch<ITask>('task/home/detail', {id});
 

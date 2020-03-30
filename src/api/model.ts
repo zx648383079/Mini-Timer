@@ -114,6 +114,9 @@ export interface ITaskLog {
     outage_time: number;
     end_at:      number;
     created_at:  string;
+    time:        number;
+    time_format: string;
+    task:        ITask;
 }
 
 export interface IBulletinUser {
