@@ -177,3 +177,7 @@ export interface IArticleComment {
     user: IUser,
 }
 
+export interface ISetting {
+    vibrate: boolean,
+    screenOn: boolean
+}

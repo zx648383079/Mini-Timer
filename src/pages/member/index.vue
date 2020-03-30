@@ -14,8 +14,9 @@
 
         <div class="menu-list">
             <MenuItem class="item" title="扫一扫" icon="fa-scan" @click="tapScan" v-if="user"/>
-            <MenuItem class="item" title="签到" icon="fa-calendar" uri="/pages/checkin/index"/>
-            <MenuItem class="item" title="我的消息" icon="fa-bell" uri="/pages/message/index"/>
+            <MenuItem class="item" title="签到" icon="fa-calendar" uri="/pages/checkin/index" v-if="user"/>
+            <MenuItem class="item" title="我的消息" icon="fa-bell" uri="/pages/message/index" v-if="user"/>
+            <MenuItem class="item" title="设置" icon="fa-setting" uri="/pages/setting/index"/>
             <MenuItem class="item" title="帮助" icon="fa-help" uri="/pages/article/index"/>
             <MenuItem class="item" title="反馈" icon="fa-feedback" uri="/pages/feedback/index"/>
         </div>

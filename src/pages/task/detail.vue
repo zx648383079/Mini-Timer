@@ -25,15 +25,11 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    IMyApp
-} from '../../app.vue';
 import { WxPage, WxJson } from '../../../typings/wx/lib.vue';
-import { ITaskDay } from '../../api/model';
+import { ITaskDay, ISetting } from '../../api/model';
 import { getTaskDayInfo, playTask, pauseTask, stopTask, checkTask } from '../../api/task';
 import { formatHour } from '../../utils/util';
-
-const app = getApp<IMyApp>();
+import { SETTING_KEY } from '../../utils/types';
 
 const TIME_SPACE = 500;
 
@@ -41,7 +37,8 @@ interface IPageData {
     day: ITaskDay | null,
     time: string,
     handle: number,
-    startAt: Date
+    startAt: Date,
+    setting: ISetting,
 }
 @WxJson({
     navigationBarTitleText: "",
@@ -53,7 +50,11 @@ export class Detail extends WxPage<IPageData> {
         day: null,
         time: '00:00',
         handle: 0,
-        startAt: new Date()
+        startAt: new Date(),
+        setting: {
+            vibrate: true,
+            screenOn: true
+        }
     };
 
     onLoad(option: any) {
@@ -62,6 +63,15 @@ export class Detail extends WxPage<IPageData> {
             wx.navigateBack();
             return;
         }
+        let setting = this.data.setting;;
+        let that = this;
+        wx.getStorage({
+            key: SETTING_KEY,
+            success(res) {
+                setting = Object.assign({}, setting, res.data);
+                that.setData({setting});
+            }
+        });
         getTaskDayInfo(id).then(res => {
             if (!res) {
                 wx.navigateBack();
@@ -73,17 +83,30 @@ export class Detail extends WxPage<IPageData> {
             if (res.status === 9) {
                 this._begin();
             }
-            wx.setKeepScreenOn({
-                keepScreenOn: true
-            });
-        })
+            this.toggleScreenOn(true);
+        });
+        
     }
 
     onUnload() {
         this._stop();
+        this.toggleScreenOn(false);
+    }
+
+    public toggleScreenOn(val: boolean) {
+        if (val && this.data.setting.hasOwnProperty('screenOn') && !this.data.setting.screenOn) {
+            return;
+        }
         wx.setKeepScreenOn({
-            keepScreenOn: false
+            keepScreenOn: val
         });
+    }
+
+    public doVibrate() {
+        if (this.data.setting.hasOwnProperty('vibrate') && !this.data.setting.vibrate) {
+            return;
+        }
+        wx.vibrateLong();
     }
 
     public tapPlay() {
@@ -181,7 +204,7 @@ export class Detail extends WxPage<IPageData> {
             this.setData({
                 day: res
             });
-            wx.vibrateLong();
+            this.doVibrate();
             if (res.tip) {
                 wx.showModal({
                     title: '提示',

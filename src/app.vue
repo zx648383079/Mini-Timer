@@ -48,7 +48,8 @@ export interface IMyApp {
         'pages/feedback/index',
         'pages/account/connect',
         'pages/account/bind',
-        'pages/authorize/index'
+        'pages/authorize/index',
+        'pages/setting/index',
     ],
     window: {
         backgroundTextStyle: 'light',
