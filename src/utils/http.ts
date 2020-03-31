@@ -32,11 +32,13 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
     if (!headers) {
         headers = {};
     }
+    // 放入 api 验证权限 
     params.appid = configs.appid;
     params.timestamp = configs.timestamp;
     params.sign = configs.sign;
     const token = wx.getStorageSync(TOKEN_KEY)
     if (token) {
+        // 插入登录令牌
         headers.Authorization = 'Bearer ' + token;
     }
     return new Promise<T>((resolve, reject) => {
@@ -62,6 +64,7 @@ export function request<T>(method: 'OPTIONS'| 'GET' | 'HEAD' | 'POST' | 'PUT' | 
                     });
                 }
                 if (statusCode === 401) {
+                    // 登录令牌失效注销
                     app && app.setToken();
                     if (!guest) {
                         wx.navigateTo({
