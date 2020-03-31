@@ -7,7 +7,7 @@ export const getTaskDayInfo = (id: number) => fetch<ITaskDay>('task/home/detail_
 
 export const getTaskList = (param: any) => fetch<IPage<ITask>>('task', param);
 
-export const getTaskLogList = (param: any) => fetch<IPage<ITaskLog>>('task/review', param);
+export const getTaskLogList = (param: any) => fetch<IPage<ITaskLog>>('task/review', param, {guest: true});
 
 
 export const getTaskInfo = (id: number) => fetch<ITask>('task/home/detail', {id});

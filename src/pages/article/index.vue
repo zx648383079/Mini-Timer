@@ -121,6 +121,10 @@ export class Index extends WxPage<IPageData> {
                 isLoading: false,
                 items: page < 2 ? res.data :  [].concat(this.data.items as never[], res.data as never[])
             });
+        }, () => {
+            this.setData({
+                isLoading: false
+            });
         });
     }
 

@@ -10,7 +10,7 @@
             </div>
 
             <div class="empty-box" v-if="items.length < 1">
-                您的今日任务为空
+                您今日没有安排了
             </div>
         </div>
 
@@ -37,7 +37,7 @@ interface IPageData {
     isLoading: boolean,
 }
 @WxJson({
-    navigationBarTitleText: "首页",
+    navigationBarTitleText: "今日任务",
     navigationBarBackgroundColor: "#f4f4f4",
     navigationBarTextStyle: "black"
 })
@@ -94,6 +94,10 @@ export class Index extends WxPage<IPageData> {
                 hasMore: res.paging.more,
                 isLoading: false,
                 items: page < 2 ? res.data :  [].concat(this.data.items as never[], res.data as never[])
+            });
+        }, () => {
+            this.setData({
+                isLoading: false
             });
         });
     }
