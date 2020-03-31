@@ -79,7 +79,13 @@ export class Index extends WxPage<IPageData> {
     }
 
     public goPage(page: number) {
-        if (this.data.isLoading || this.data.isGuest) {
+        if (this.data.isGuest) {
+            this.setData({
+                items: []
+            });
+            return;
+        }
+        if (this.data.isLoading) {
             return;
         }
         this.setData({
