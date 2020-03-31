@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="logo">
-            <img src="/images/wap_logo.png" mode="widthFix">
+            <img src="/images/logo.png" mode="widthFix">
         </div>
         <form bindsubmit="formSubmit" >
             <div class="input-box">

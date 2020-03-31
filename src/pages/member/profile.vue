@@ -172,7 +172,7 @@ export class Profile extends WxPage<IPageData> {
                         return; 
                     }
                     page.onShow();
-            }
+                }
             });
         });
     }

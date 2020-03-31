@@ -101,5 +101,9 @@ export class Index extends WxPage<IPageData> {
 }
 </script>
 <style lang="scss" scoped>
-
+.logo {
+    image {
+        width: 200rpx;
+    }
+}
 </style>

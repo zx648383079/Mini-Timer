@@ -67,7 +67,14 @@ export default class Cancel extends WxPage<IPageData> {
                 showCancel: false,
                 success() {
                     wx.switchTab({
-                        url: '/pages/index/index'
+                        url: '/pages/index/index',
+                        success () { 
+                            let page = getCurrentPages().pop(); 
+                            if (!page) {
+                                return; 
+                            }
+                            page.onShow();
+                        }
                     });
                 }
             })

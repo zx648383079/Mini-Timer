@@ -41,7 +41,8 @@ interface IPageData {
 @WxJson({
     navigationBarTitleText: "消息中心",
     navigationBarBackgroundColor: "#f4f4f4",
-    navigationBarTextStyle: "black"
+    navigationBarTextStyle: "black",
+    enablePullDownRefresh: true
 })
 export class Index extends WxPage<IPageData> {
     public data: IPageData = {
@@ -61,6 +62,7 @@ export class Index extends WxPage<IPageData> {
 
     onPullDownRefresh() {
         this.tapRefresh();
+        wx.stopPullDownRefresh();
     }
 
     onReachBottom() {
