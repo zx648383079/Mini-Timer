@@ -52,9 +52,6 @@ export class Index extends WxPage<IPageData> {
     };
 
     onLoad() {
-    }
-
-    onShow() {
         this.setData({
             isGuest: !app.globalData.token
         });
@@ -101,6 +98,11 @@ export class Index extends WxPage<IPageData> {
             this.setData({
                 isLoading: false
             });
+            if (page < 2) {
+                this.setData({
+                    items: []
+                });
+            }
         });
     }
 

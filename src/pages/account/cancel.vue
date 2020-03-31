@@ -73,7 +73,7 @@ export default class Cancel extends WxPage<IPageData> {
                             if (!page) {
                                 return; 
                             }
-                            page.onShow();
+                            page.onLoad();
                         }
                     });
                 }
