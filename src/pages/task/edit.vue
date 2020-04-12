@@ -5,7 +5,7 @@
             <i class="fa fa-check" @click="tapSubmit"></i>
         </div>
         <div class="input-box">
-            <input type="text" name="name" required v-model="info.name" placeholder="请输入账号">
+            <input type="text" name="name" required v-model="info.name" placeholder="请输入任务名">
         </div>
         <div class="input-box">
             <input type="text" name="description" required v-model="info.description" placeholder="请输入说明">
