@@ -169,7 +169,7 @@ export class Detail extends WxPage<IPageData> {
         if (this.data.handle > 0) {
             clearInterval(this.data.handle);
         }
-        this.data.startAt = new Date(typeof this.data.day.log.created_at == 'number' ? this.data.day.log.created_at * 1000 : this.data.day.log.created_at)
+        this.data.startAt = new Date(this.data.day.log.time * 1000 + new Date().getTime());
         this.data.handle = setInterval(() => {
             this._showTime();
         }, TIME_SPACE);
