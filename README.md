@@ -1,6 +1,10 @@
 # Mini-Timer
  小程序端时间管理
 
+# 使用方法
+
+配置 `src/config/config.ts` 复制`src/config/config.sample.ts` 内容 即可
+
 
 ## 编译单个文件
 

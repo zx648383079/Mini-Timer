@@ -1,13 +1,6 @@
 import { Md5 } from 'ts-md5';
-
-const IS_DEV = !1;
-
-const BASIC_HOST = IS_DEV ? 'http://zodream.localhost' : 'https://zodream.cn';
-
-export const apiEndpoint = BASIC_HOST + '/open/';
-export const assetUri = BASIC_HOST;
-export const appId = '11543906547';
-export const secret = '012e936d3d3653b40c6fc5a32e4ea685';
+import { appId, secret } from '../config/config';
+export * from '../config/config';
 
 interface IAppParam {
     appid: string,
