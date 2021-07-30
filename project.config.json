@@ -1,60 +1,69 @@
 {
-	"description": "项目配置文件",
-	"packOptions": {
-		"ignore": []
-	},
-	"miniprogramRoot": "dist/",
-	"compileType": "miniprogram",
-	"libVersion": "2.8.2",
-	"projectname": "Mini-Timer",
-	"scripts": {
-		"beforeCompile": "",
-		"beforePreview": "npm run start",
-		"beforeUpload": "npm run build"
-	},
-	"setting": {
-		"urlCheck": false,
-		"es6": false,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"nodeModules": true,
-		"autoAudits": false
-	},
-	"simulatorType": "wechat",
-	"appid": "wxfc5287e8354375f4",
-	"simulatorPluginLibVersion": {},
-	"condition": {
-		"search": {
-			"current": -1,
-			"list": []
-		},
-		"conversation": {
-			"current": -1,
-			"list": []
-		},
-		"plugin": {
-			"current": -1,
-			"list": []
-		},
-		"game": {
-			"list": []
-		},
-		"gamePlugin": {
-			"current": -1,
-			"list": []
-		},
-		"miniprogram": {
-			"current": -1,
-			"list": [
-				{
-					"id": 0,
-					"name": "pages/article/index",
-					"pathName": "pages/article/index",
-					"query": "id=107",
-					"scene": null
-				}
-			]
-		}
-	}
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": []
+  },
+  "miniprogramRoot": "dist/",
+  "compileType": "miniprogram",
+  "libVersion": "2.16.1",
+  "projectname": "Mini-Timer",
+  "scripts": {
+    "beforeCompile": "",
+    "beforePreview": "npm run start",
+    "beforeUpload": "npm run build"
+  },
+  "setting": {
+    "urlCheck": false,
+    "es6": false,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "scopeDataCheck": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "useCompilerModule": false,
+    "userConfirmedUseCompilerModuleSwitch": false,
+    "userConfirmedBundleSwitch": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "bundle": false,
+    "useApiHostProcess": false
+  },
+  "simulatorType": "wechat",
+  "appid": "wxde44f05016fe8556",
+  "simulatorPluginLibVersion": {},
+  "condition": {
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": []
+    }
+  }
 }

@@ -3,7 +3,7 @@ import { IPage, IArticle, IData, IArticleCategory, IArticleComment } from "./mod
 
 export const getArticleList = (param: any) => fetch<IPage<IArticle>>('blog', param);
 
-export const getCategories = () => fetch<IData<IArticleCategory>>('blog/term');
+export const getCategories = () => fetch<IData<IArticleCategory>>('blog/category');
 
 export const getArticle = (id: number) => fetch<IArticle>('blog', {id});
 
